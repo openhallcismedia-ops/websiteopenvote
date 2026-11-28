@@ -10,11 +10,11 @@
     :root {
       --bg: #06090e;
       --glass-bg: rgba(255, 255, 255, 0.045);
-      --glass-bg-elevated: rgba(255, 255, 255, 0.075);
-      --glass-border: rgba(255, 255, 255, 0.14);
-      --glass-border-top: rgba(255, 255, 255, 0.34);
-      --glass-highlight: rgba(255, 255, 255, 0.25);
-      --glass-rim: rgba(255, 255, 255, 0.06);
+      --glass-bg-elevated: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.13);
+      --glass-border-top: rgba(255, 255, 255, 0.3);
+      --glass-highlight: rgba(255, 255, 255, 0.22);
+      --glass-rim: rgba(255, 255, 255, 0.05);
       --emerald: #00e599;
       --cyan: #00b4d8;
       --blue: #1877f2;
@@ -24,25 +24,25 @@
       --grad-main: linear-gradient(135deg, #00e599, #00b4d8, #1877f2);
       --text-main: #ffffff;
       --text-sub: #94a3b8;
-      --track-bg: rgba(255, 255, 255, 0.1);
+      --track-bg: rgba(255, 255, 255, 0.12);
       --input-bg: rgba(0, 0, 0, 0.28);
-      --nav-bg: rgba(14, 19, 30, 0.65);
-      --modal-bg: rgba(16, 22, 34, 0.88);
+      --nav-bg: rgba(12, 17, 27, 0.78);
+      --modal-bg: rgba(15, 21, 33, 0.94);
       --tag-bg: rgba(255, 255, 255, 0.07);
-      --tag-border: rgba(255, 255, 255, 0.15);
+      --tag-border: rgba(255, 255, 255, 0.14);
       --tag-color: #cbd5e1;
-      --shadow-color: rgba(0, 0, 0, 0.55);
+      --shadow-color: rgba(0, 0, 0, 0.48);
       --spring-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     html.light-theme, body.light-theme {
       --bg: #eef2f6;
-      --glass-bg: rgba(255, 255, 255, 0.58);
-      --glass-bg-elevated: rgba(255, 255, 255, 0.78);
-      --glass-border: rgba(255, 255, 255, 0.75);
-      --glass-border-top: rgba(255, 255, 255, 0.98);
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-bg-elevated: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.8);
+      --glass-border-top: rgba(255, 255, 255, 1);
       --glass-highlight: rgba(255, 255, 255, 0.95);
-      --glass-rim: rgba(15, 23, 42, 0.06);
+      --glass-rim: rgba(15, 23, 42, 0.05);
       --emerald: #059669;
       --cyan: #0284c7;
       --blue: #2563eb;
@@ -52,14 +52,14 @@
       --grad-main: linear-gradient(135deg, #059669, #0284c7, #2563eb);
       --text-main: #0f172a;
       --text-sub: #475569;
-      --track-bg: rgba(15, 23, 42, 0.1);
-      --input-bg: rgba(255, 255, 255, 0.65);
-      --nav-bg: rgba(255, 255, 255, 0.72);
-      --modal-bg: rgba(255, 255, 255, 0.92);
-      --tag-bg: rgba(255, 255, 255, 0.65);
+      --track-bg: rgba(15, 23, 42, 0.12);
+      --input-bg: rgba(255, 255, 255, 0.72);
+      --nav-bg: rgba(255, 255, 255, 0.82);
+      --modal-bg: rgba(255, 255, 255, 0.96);
+      --tag-bg: rgba(255, 255, 255, 0.72);
       --tag-border: rgba(15, 23, 42, 0.12);
       --tag-color: #334155;
-      --shadow-color: rgba(15, 23, 42, 0.08);
+      --shadow-color: rgba(15, 23, 42, 0.07);
     }
 
     * {
@@ -80,10 +80,10 @@
       min-height: 100vh;
       background-color: var(--bg);
       color: var(--text-main);
-      padding-top: 24px;
+      padding-top: 20px;
       padding-left: 16px;
       padding-right: 16px;
-      padding-bottom: calc(116px + env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px));
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -94,8 +94,10 @@
 
     @media (min-width: 768px) {
       body {
-        padding-top: 32px;
-        padding-bottom: 56px;
+        padding-top: 28px;
+        padding-left: 28px;
+        padding-right: 28px;
+        padding-bottom: 64px;
       }
     }
 
@@ -110,57 +112,56 @@
       transition: background-color 0.35s ease;
     }
 
-    /* Яркие световые пятна для преломления сквозь жидкое стекло */
     .bg-blob {
       position: fixed;
       border-radius: 50%;
-      filter: blur(90px);
+      filter: blur(95px);
       z-index: -1;
       pointer-events: none;
-      opacity: 0.55;
-      animation: floatBlobs 14s ease-in-out infinite alternate;
+      opacity: 0.45;
+      animation: floatBlobs 16s ease-in-out infinite alternate;
     }
 
     body.light-theme .bg-blob {
-      opacity: 0.35;
+      opacity: 0.28;
     }
 
     .blob-1 {
-      width: 380px;
-      height: 380px;
+      width: 420px;
+      height: 420px;
       background: radial-gradient(circle, #00e599 0%, transparent 70%);
-      top: -80px;
-      left: 8%;
+      top: -90px;
+      left: 6%;
     }
 
     .blob-2 {
-      width: 420px;
-      height: 420px;
+      width: 460px;
+      height: 460px;
       background: radial-gradient(circle, #00b4d8 0%, transparent 70%);
-      bottom: 40px;
-      right: 6%;
-      animation-duration: 18s;
+      bottom: 20px;
+      right: 4%;
+      animation-duration: 20s;
       animation-direction: alternate-reverse;
     }
 
     .blob-3 {
-      width: 300px;
-      height: 300px;
+      width: 320px;
+      height: 320px;
       background: radial-gradient(circle, #1877f2 0%, transparent 70%);
-      top: 38%;
-      left: 38%;
-      opacity: 0.38;
+      top: 36%;
+      left: 42%;
+      opacity: 0.32;
     }
 
     @keyframes floatBlobs {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(35px, 45px) scale(1.08); }
-      100% { transform: translate(-25px, -30px) scale(0.95); }
+      50% { transform: translate(30px, 35px) scale(1.06); }
+      100% { transform: translate(-20px, -25px) scale(0.96); }
     }
 
     .container {
       width: 100%;
-      max-width: 640px;
+      max-width: 960px;
       position: relative;
       z-index: 1;
       flex: 1;
@@ -168,38 +169,55 @@
       flex-direction: column;
     }
 
-    /* ВЕРХНЯЯ ПАНЕЛЬ + ДЕСКТОПНАЯ НАВИГАЦИЯ */
+    /* ВЕРХНЯЯ ПАНЕЛЬ САЙТА */
     .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
+      gap: 14px;
+      margin-bottom: 32px;
+      padding: 10px 14px;
+      border-radius: 22px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(26px) saturate(180%);
+      -webkit-backdrop-filter: blur(26px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-top-color: var(--glass-border-top);
+      box-shadow: 0 10px 28px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
     }
 
-    .badge {
-      font-size: 11px;
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1.1px;
-      background: rgba(0, 229, 153, 0.12);
+      letter-spacing: 1px;
       color: var(--emerald);
-      border: 1px solid rgba(0, 229, 153, 0.35);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 4px 14px rgba(0, 229, 153, 0.12);
+      background: rgba(0, 229, 153, 0.12);
+      border: 1px solid rgba(0, 229, 153, 0.32);
       padding: 7px 14px;
-      border-radius: 20px;
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 15px;
+      cursor: pointer;
       flex-shrink: 0;
     }
 
-    body.light-theme .badge {
-      background: rgba(236, 253, 245, 0.8);
-      color: #047857;
-      border: 1px solid rgba(16, 185, 129, 0.35);
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
     }
 
-    /* Десктопная стеклянная навигация в шапке (вместо нижнего пузыря) */
+    body.light-theme .brand-link {
+      background: rgba(5, 150, 105, 0.1);
+      color: #047857;
+      border-color: rgba(5, 150, 105, 0.28);
+    }
+
+    /* ДЕСКТОПНАЯ НАВИГАЦИЯ В ШАПКЕ */
     .desktop-nav {
       display: none;
     }
@@ -209,64 +227,51 @@
         display: flex;
         align-items: center;
         gap: 4px;
-        padding: 4px;
-        border-radius: 22px;
-        background: var(--glass-bg);
-        backdrop-filter: blur(28px) saturate(180%);
-        -webkit-backdrop-filter: blur(28px) saturate(180%);
-        border: 1px solid var(--glass-border);
-        border-top-color: var(--glass-border-top);
-        box-shadow: 0 8px 24px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
       }
 
       .desktop-nav-btn {
         background: transparent;
         border: 1px solid transparent;
         color: var(--text-sub);
-        padding: 7px 14px;
-        border-radius: 17px;
+        padding: 8px 15px;
+        border-radius: 14px;
         font-size: 13px;
         font-weight: 700;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        transition: all 0.25s var(--spring-ease);
+        transition: all 0.22s ease;
       }
 
       .desktop-nav-btn:hover {
         color: var(--text-main);
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.06);
       }
 
       .desktop-nav-btn.active {
-        color: var(--emerald);
+        color: var(--text-main);
         background: var(--glass-bg-elevated);
         border-color: var(--glass-border);
         border-top-color: var(--glass-border-top);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 1px var(--glass-highlight);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16), inset 0 1px 1px var(--glass-highlight);
       }
     }
 
-    /* LIQUID GLASS BUTTONS */
+    /* КНОПКИ И ИНТЕРАКТИВНЫЕ ЭЛЕМЕНТЫ */
     .ios-btn-tap, .btn-small, .btn-action, .btn-secondary, .read-reviews-btn, .theme-toggle-btn, .nav-btn, .rank-item, .upload-zone {
       cursor: pointer;
       touch-action: manipulation;
-      transition: transform 0.24s var(--spring-ease), opacity 0.2s ease, box-shadow 0.24s ease, filter 0.2s ease, background 0.2s ease;
+      transition: transform 0.22s var(--spring-ease), opacity 0.2s ease, box-shadow 0.22s ease, filter 0.2s ease, background 0.2s ease;
     }
 
     .touch-active, .ios-btn-tap:active, .btn-small:active, .btn-action:active, .btn-secondary:active, .read-reviews-btn:active, .theme-toggle-btn:active, .nav-btn:active, .rank-item:active, .upload-zone:active {
-      transform: scale(0.95) !important;
+      transform: scale(0.96) !important;
     }
 
     .theme-toggle-btn {
-      background: var(--glass-bg);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      background: var(--glass-bg-elevated);
       border: 1px solid var(--glass-border);
       border-top-color: var(--glass-border-top);
       color: var(--text-main);
-      width: 40px;
+      width: 38px;
       height: 36px;
       border-radius: 14px;
       display: flex;
@@ -274,37 +279,30 @@
       justify-content: center;
       font-size: 15px;
       flex-shrink: 0;
-      box-shadow: 0 6px 16px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
-    }
-
-    .theme-toggle-btn:hover {
-      background: var(--glass-bg-elevated);
-      transform: translateY(-1px);
+      box-shadow: inset 0 1px 1px var(--glass-highlight);
     }
 
     .btn-small {
       background: linear-gradient(180deg, rgba(0, 229, 153, 0.22) 0%, rgba(0, 229, 153, 0.08) 100%);
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
-      border: 1px solid rgba(0, 229, 153, 0.45);
-      border-top-color: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(0, 229, 153, 0.42);
+      border-top-color: rgba(255, 255, 255, 0.42);
       color: var(--emerald);
       padding: 9px 18px;
-      border-radius: 14px;
+      border-radius: 13px;
       font-size: 13px;
       font-weight: 800;
       flex-shrink: 0;
-      box-shadow: 0 6px 18px rgba(0, 229, 153, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      box-shadow: 0 4px 14px rgba(0, 229, 153, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
     .btn-small:hover {
-      box-shadow: 0 8px 22px rgba(0, 229, 153, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.5);
       transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0, 229, 153, 0.24), inset 0 1px 1px rgba(255, 255, 255, 0.45);
     }
 
     body.light-theme .btn-small {
-      background: linear-gradient(180deg, rgba(16, 185, 129, 0.92) 0%, rgba(5, 150, 105, 0.96) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+      border: 1px solid rgba(255, 255, 255, 0.5);
       color: #ffffff;
     }
 
@@ -315,54 +313,34 @@
       color: var(--cyan);
       font-weight: 700;
       padding: 8px 14px;
-      border-radius: 13px;
-      background: linear-gradient(180deg, rgba(0, 180, 216, 0.16) 0%, rgba(0, 180, 216, 0.06) 100%);
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-      border: 1px solid rgba(0, 180, 216, 0.32);
-      border-top-color: rgba(255, 255, 255, 0.35);
-      box-shadow: 0 4px 14px rgba(0, 180, 216, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      background: rgba(0, 180, 216, 0.12);
+      border: 1px solid rgba(0, 180, 216, 0.28);
     }
 
     .read-reviews-btn:hover {
-      background: linear-gradient(180deg, rgba(0, 180, 216, 0.24) 0%, rgba(0, 180, 216, 0.1) 100%);
+      background: rgba(0, 180, 216, 0.2);
       transform: translateY(-1px);
     }
 
     .btn-action {
       width: 100%;
-      padding: 16px;
-      border-radius: 18px;
+      padding: 15px 20px;
+      border-radius: 16px;
       background: var(--grad-main);
       color: #ffffff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      border-top-color: rgba(255, 255, 255, 0.7);
-      box-shadow: 0 10px 28px rgba(0, 229, 153, 0.28), inset 0 1.5px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-top-color: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 10px 26px rgba(0, 229, 153, 0.24), inset 0 1px 1px rgba(255, 255, 255, 0.55);
       position: relative;
       overflow: hidden;
     }
 
-    .btn-action::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.55s ease;
-    }
-
-    .btn-action:hover::after {
-      left: 150%;
-    }
-
     .btn-action:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 32px rgba(0, 229, 153, 0.38), inset 0 1.5px 1px rgba(255, 255, 255, 0.75);
+      box-shadow: 0 12px 30px rgba(0, 229, 153, 0.34), inset 0 1px 1px rgba(255, 255, 255, 0.7);
     }
 
     body:not(.light-theme) .btn-action {
@@ -371,19 +349,15 @@
 
     .btn-secondary {
       width: 100%;
-      padding: 14px;
-      border-radius: 16px;
+      padding: 13px 18px;
+      border-radius: 15px;
       background: var(--glass-bg-elevated);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(0, 229, 153, 0.4);
-      border-top-color: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(0, 229, 153, 0.38);
       color: var(--emerald);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       margin-top: 10px;
       display: none;
-      box-shadow: 0 6px 20px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
     }
 
     .tab-view {
@@ -392,48 +366,101 @@
 
     .tab-view.active {
       display: block;
-      animation: liquidIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      animation: liquidIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     @keyframes liquidIn {
-      0% { opacity: 0; transform: translateY(10px) scale(0.99); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-header {
+      margin-bottom: 24px;
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 800;
       letter-spacing: -0.6px;
       color: var(--text-main);
     }
 
-    p.subtitle {
-      font-size: 14px;
-      color: var(--text-sub);
-      margin-top: 4px;
-      margin-bottom: 22px;
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 34px;
+      }
     }
 
-    /* LIQUID GLASS CARDS */
+    p.subtitle {
+      font-size: 15px;
+      color: var(--text-sub);
+      margin-top: 6px;
+    }
+
+    /* АДАПТИВНАЯ СЕТКА ЛЕНТЫ НА ВЕБ-САЙТЕ */
+    .feed-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 768px) {
+      .feed-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    /* СЕТКА ЭКРАНА ОЦЕНКИ НА ДЕСКТОПЕ */
+    .scoring-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 820px) {
+      .scoring-layout {
+        grid-template-columns: 1.05fr 1fr;
+        gap: 22px;
+        align-items: start;
+      }
+    }
+
+    /* СЕТКА ПРОФИЛЯ И ПОДАЧИ ИДЕИ НА ДЕСКТОПЕ */
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 820px) {
+      .profile-layout {
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 22px;
+        align-items: start;
+      }
+    }
+
+    /* КАРТОЧКИ LIQUID GLASS */
     .card {
       background: var(--glass-bg);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      backdrop-filter: blur(26px) saturate(180%);
+      -webkit-backdrop-filter: blur(26px) saturate(180%);
       border: 1px solid var(--glass-border);
       border-top-color: var(--glass-border-top);
-      border-radius: 24px;
+      border-radius: 22px;
       padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 12px 32px var(--shadow-color), inset 0 1px 1px var(--glass-highlight), inset 0 -1px 1px var(--glass-rim);
+      box-shadow: 0 10px 28px var(--shadow-color), inset 0 1px 1px var(--glass-highlight), inset 0 -1px 1px var(--glass-rim);
       position: relative;
       overflow: hidden;
-      transform-style: preserve-3d;
-      perspective: 1000px;
-      transition: transform 0.25s var(--spring-ease), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .card.tilting {
-      transition: none;
+    .feed-grid .card {
+      margin-bottom: 0;
     }
 
     .card.tier-none { border-color: var(--glass-border); }
@@ -465,6 +492,7 @@
       color: var(--text-sub);
       line-height: 1.5;
       margin-bottom: 14px;
+      flex: 1;
     }
 
     /* КАРУСЕЛЬ СКРИНШОТОВ */
@@ -486,13 +514,12 @@
     .carousel-slide {
       flex: 0 0 100%;
       scroll-snap-align: center;
-      border-radius: 16px;
+      border-radius: 15px;
       overflow: hidden;
       border: 1px solid var(--glass-border);
       background: rgba(0, 0, 0, 0.25);
       position: relative;
       cursor: zoom-in;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
     }
 
     .screenshots-carousel.multi-slides .carousel-slide {
@@ -501,7 +528,7 @@
 
     .carousel-slide img {
       width: 100%;
-      height: 240px;
+      height: 210px;
       object-fit: cover;
       display: block;
     }
@@ -516,7 +543,7 @@
       font-weight: 800;
       padding: 4px 9px;
       border-radius: 12px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
     }
 
     .screenshot-zoom-hint {
@@ -528,16 +555,15 @@
       font-size: 10px;
       font-weight: 700;
       padding: 4px 9px;
-      border-radius: 9px;
-      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
     }
 
     .upload-zone {
       width: 100%;
       border: 1.5px dashed var(--glass-border-top);
       background: var(--input-bg);
-      backdrop-filter: blur(16px);
-      border-radius: 16px;
+      border-radius: 15px;
       padding: 18px;
       text-align: center;
       margin-bottom: 12px;
@@ -546,7 +572,6 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     .upload-gallery-grid {
@@ -594,6 +619,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+      margin-top: auto;
     }
 
     .project-tags {
@@ -606,18 +632,17 @@
       font-size: 11px;
       font-weight: 700;
       background: var(--tag-bg);
-      backdrop-filter: blur(12px);
       border: 1px solid var(--tag-border);
-      border-top-color: var(--glass-border-top);
       color: var(--tag-color);
       padding: 6px 12px;
-      border-radius: 11px;
+      border-radius: 10px;
       cursor: pointer;
     }
 
     .author-badge {
       display: inline-flex;
       align-items: center;
+      align-self: flex-start;
       gap: 7px;
       background: var(--tag-bg);
       border: 1px solid var(--tag-border);
@@ -651,7 +676,7 @@
       align-items: center;
       justify-content: space-between;
       background: var(--glass-bg-elevated);
-      backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(22px) saturate(180%);
       border: 1px solid rgba(0, 229, 153, 0.35);
       border-top-color: var(--glass-border-top);
       border-radius: 18px;
@@ -670,15 +695,15 @@
 
     .score-banner {
       background: var(--glass-bg);
-      backdrop-filter: blur(28px) saturate(180%);
+      backdrop-filter: blur(26px) saturate(180%);
       border: 1px solid var(--glass-border);
       border-top-color: var(--glass-border-top);
-      border-radius: 24px;
+      border-radius: 22px;
       padding: 20px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       box-shadow: 0 10px 28px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
@@ -735,32 +760,30 @@
 
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: var(--slider-thumb-color, var(--emerald));
       cursor: pointer;
       border: 2.5px solid #fff;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.38);
     }
 
     input[type=text], textarea {
       width: 100%;
       background: var(--input-bg);
-      backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
-      border-radius: 14px;
+      border-radius: 13px;
       padding: 12px 14px;
       color: var(--text-main);
       font-size: 14px;
       outline: none;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.18);
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     input[type=text]:focus, textarea:focus {
       border-color: var(--emerald);
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.18), 0 0 0 3px rgba(0, 229, 153, 0.15);
+      box-shadow: 0 0 0 3px rgba(0, 229, 153, 0.14);
     }
 
     textarea {
@@ -773,12 +796,12 @@
       align-items: center;
       justify-content: space-between;
       background: var(--glass-bg);
-      backdrop-filter: blur(26px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
       border: 1px solid var(--glass-border);
       border-top-color: var(--glass-border-top);
       border-radius: 18px;
-      padding: 15px 18px;
-      margin-bottom: 10px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
       box-shadow: 0 6px 20px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
     }
 
@@ -786,7 +809,7 @@
       font-size: 16px;
       font-weight: 800;
       color: var(--text-sub);
-      width: 30px;
+      width: 32px;
     }
 
     .rank-info {
@@ -805,32 +828,32 @@
     }
 
     .rank-score {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 800;
       color: var(--emerald);
     }
 
-    /* МОБИЛЬНАЯ НИЖНЯЯ ПАНЕЛЬ (СКРЫВАЕТСЯ НА ДЕСКТОПЕ) */
+    /* МОБИЛЬНАЯ ПАНЕЛЬ НАВИГАЦИИ (ТОЛЬКО ДО 767PX) */
     .bottom-nav {
       position: fixed;
-      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-      left: 14px;
-      right: 14px;
+      bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+      left: 12px;
+      right: 12px;
       max-width: 520px;
       margin: 0 auto;
-      height: 70px;
+      height: 64px;
       background: var(--nav-bg);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      backdrop-filter: blur(26px) saturate(180%);
+      -webkit-backdrop-filter: blur(26px) saturate(180%);
       border: 1px solid var(--glass-border);
       border-top-color: var(--glass-border-top);
-      border-radius: 24px;
+      border-radius: 20px;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 0 8px;
+      padding: 0 6px;
       z-index: 999;
-      box-shadow: 0 12px 36px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
+      box-shadow: 0 10px 28px var(--shadow-color);
     }
 
     @media (min-width: 768px) {
@@ -841,15 +864,14 @@
 
     .nav-indicator {
       position: absolute;
-      top: 7px;
-      bottom: 7px;
-      left: 8px;
-      width: calc(20% - 3.2px);
-      border-radius: 17px;
+      top: 6px;
+      bottom: 6px;
+      left: 6px;
+      width: calc(20% - 2.4px);
+      border-radius: 15px;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.14);
-      border-top-color: rgba(255, 255, 255, 0.28);
-      transition: transform 0.38s var(--spring-ease);
+      transition: transform 0.35s var(--spring-ease);
       pointer-events: none;
     }
 
@@ -868,18 +890,16 @@
     }
 
     .nav-icon {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       stroke: var(--text-sub);
       fill: none;
       stroke-width: 2;
       margin-bottom: 3px;
-      transition: stroke 0.2s ease, transform 0.2s var(--spring-ease);
     }
 
     .nav-btn.active .nav-icon {
       stroke: var(--emerald);
-      transform: translateY(-1px);
     }
 
     .nav-btn.active {
@@ -911,7 +931,7 @@
         padding: 20px;
       }
       .app-modal-sheet {
-        border-radius: 26px !important;
+        border-radius: 24px !important;
       }
     }
 
@@ -922,17 +942,17 @@
 
     .app-modal-sheet {
       width: 100%;
-      max-width: 560px;
+      max-width: 580px;
       max-height: 82vh;
       background: var(--modal-bg);
-      backdrop-filter: blur(32px) saturate(180%);
+      backdrop-filter: blur(30px) saturate(180%);
       border: 1px solid var(--glass-border);
       border-top-color: var(--glass-border-top);
-      border-radius: 26px 26px 0 0;
+      border-radius: 24px 24px 0 0;
       display: flex;
       flex-direction: column;
       padding-bottom: env(safe-area-inset-bottom, 0px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
     }
 
     .app-modal-header {
@@ -985,14 +1005,14 @@
 
     .agent-chat-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(28px) saturate(180%);
+      backdrop-filter: blur(26px) saturate(180%);
       border: 1px solid var(--glass-border);
       border-top-color: var(--glass-border-top);
-      border-radius: 24px;
+      border-radius: 22px;
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 260px);
-      min-height: 360px;
+      height: calc(100vh - 250px);
+      min-height: 380px;
       overflow: hidden;
       box-shadow: 0 12px 32px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
     }
@@ -1000,15 +1020,15 @@
     .agent-messages {
       flex: 1;
       overflow-y: auto;
-      padding: 16px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
     .agent-msg {
-      max-width: 82%;
-      padding: 11px 14px;
+      max-width: 78%;
+      padding: 11px 15px;
       border-radius: 16px;
       font-size: 14px;
       line-height: 1.45;
@@ -1033,7 +1053,7 @@
       display: flex;
       align-items: flex-end;
       gap: 8px;
-      padding: 10px;
+      padding: 12px;
       border-top: 1px solid var(--tag-border);
     }
 
@@ -1043,14 +1063,14 @@
       max-height: 90px;
       min-height: 42px;
       font-size: 14px;
-      padding: 10px 13px;
+      padding: 10px 14px;
     }
 
     .agent-send-btn {
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.35);
       background: var(--grad-main);
       color: #ffffff;
       font-size: 16px;
@@ -1058,7 +1078,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 229, 153, 0.25);
+      flex-shrink: 0;
     }
 
     .app-toast {
@@ -1066,7 +1086,7 @@
       top: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
-      background: rgba(18, 24, 38, 0.92);
+      background: rgba(18, 24, 38, 0.94);
       backdrop-filter: blur(20px);
       border: 1px solid var(--emerald);
       color: #ffffff;
@@ -1111,8 +1131,8 @@
 <div class="fixed-app-background"></div>
 <div id="app-toast" class="app-toast"><span>✨</span><span id="toast-text">Notification</span></div>
 <div class="bg-blob blob-1"></div>
-<div class="blob-2 bg-blob"></div>
-<div class="blob-3 bg-blob"></div>
+<div class="bg-blob blob-2 bg-blob"></div>
+<div class="bg-blob blob-3 bg-blob"></div>
 
 <!-- FULLSCREEN SCREENSHOT LIGHTBOX -->
 <div id="screenshot-lightbox" class="lightbox-overlay" onclick="closeLightbox()">
@@ -1120,98 +1140,114 @@
 </div>
 
 <div class="container">
-  <div class="top-bar">
-    <div class="badge">Open Hall</div>
+  <header class="top-bar">
+    <button type="button" class="brand-link" onclick="switchTab('feed')">
+      <span class="brand-dot"></span>
+      <span>Open Hall</span>
+    </button>
 
-    <!-- ДЕСКТОПНОЕ СТЕКЛЯННОЕ МЕНЮ В ШАПКЕ -->
-    <nav class="desktop-nav">
-      <button class="desktop-nav-btn active" onclick="switchTab('feed')">Feed</button>
-      <button class="desktop-nav-btn" onclick="switchTab('scoring')">Rate</button>
-      <button class="desktop-nav-btn" onclick="switchTab('top')">Top</button>
-      <button class="desktop-nav-btn" onclick="switchTab('agent')">Chief 🦝</button>
-      <button class="desktop-nav-btn" onclick="switchTab('profile')">Profile</button>
+    <nav class="desktop-nav" aria-label="Primary Navigation">
+      <button type="button" class="desktop-nav-btn active" onclick="switchTab('feed')">Feed</button>
+      <button type="button" class="desktop-nav-btn" onclick="switchTab('scoring')">Rate</button>
+      <button type="button" class="desktop-nav-btn" onclick="switchTab('top')">Leaderboard</button>
+      <button type="button" class="desktop-nav-btn" onclick="switchTab('agent')">Chief AI</button>
+      <button type="button" class="desktop-nav-btn" onclick="switchTab('profile')">Submit & Profile</button>
     </nav>
 
-    <button class="theme-toggle-btn ios-btn-tap" id="themeToggleBtn" onclick="toggleAppTheme()" title="Toggle Theme">☀️</button>
-  </div>
+    <button type="button" class="theme-toggle-btn ios-btn-tap" id="themeToggleBtn" onclick="toggleAppTheme()" title="Toggle Theme">☀️</button>
+  </header>
 
   <!-- TAB 1: FEED -->
-  <div id="tab-feed" class="tab-view active">
-    <h1>Discover & Rate</h1>
-    <p class="subtitle">Real people rating bold ideas, apps, and creative projects</p>
-    <div id="feed-list"><div class="card"><p>Loading community feed...</p></div></div>
-  </div>
+  <section id="tab-feed" class="tab-view active">
+    <div class="page-header">
+      <h1>Discover & Rate</h1>
+      <p class="subtitle">Real people rating bold ideas, apps, and creative projects from 1 to 10</p>
+    </div>
+    <div id="feed-list" class="feed-grid"><div class="card"><p>Loading community feed...</p></div></div>
+  </section>
 
   <!-- TAB 2: RATE -->
-  <div id="tab-scoring" class="tab-view">
-    <h1 id="t_score_title">Rate Project</h1>
-    <p class="subtitle">Score across 4 simple criteria from 1 to 10</p>
+  <section id="tab-scoring" class="tab-view">
+    <div class="page-header">
+      <h1 id="t_score_title">Rate Project</h1>
+      <p class="subtitle">Score across 4 simple criteria from 1 to 10</p>
+    </div>
 
-    <div class="scoring-target-badge">
+    <div class="scoring-layout">
       <div>
-        <span class="target-label-styled">Currently rating</span>
-        <h3 id="scoringTargetName" style="font-size:17px; font-weight:800; margin-top:2px;">Open Hall</h3>
+        <div class="scoring-target-badge">
+          <div>
+            <span class="target-label-styled">Currently rating</span>
+            <h3 id="scoringTargetName" style="font-size:18px; font-weight:800; margin-top:2px;">Open Hall</h3>
+          </div>
+          <button type="button" class="btn-small ios-btn-tap" onclick="switchTab('feed')" style="padding:7px 13px; font-size:12px;">Switch</button>
+        </div>
+
+        <div id="scoringCarouselBox" class="screenshots-carousel" style="display:none;"></div>
+
+        <div class="score-banner" id="scoreBannerBox">
+          <div>
+            <span style="font-size:12px; color:var(--text-sub); display:block; margin-bottom:2px;">Community Verdict</span>
+            <div id="verdict" style="font-size:16px; font-weight:700; color:var(--cyan);">Community Approved</div>
+          </div>
+          <div style="display:flex; align-items:baseline; gap:4px;">
+            <div id="totalScore" class="big-num">7.0</div>
+            <div style="font-size:16px; color:var(--text-sub); font-weight:600;">/ 10</div>
+          </div>
+        </div>
       </div>
-      <button class="btn-small ios-btn-tap" onclick="switchTab('feed')" style="padding:7px 13px; font-size:12px;">Switch</button>
-    </div>
 
-    <div id="scoringCarouselBox" class="screenshots-carousel" style="display:none;"></div>
-
-    <div class="score-banner" id="scoreBannerBox">
       <div>
-        <span style="font-size:12px; color:var(--text-sub); display:block; margin-bottom:2px;">Community Verdict</span>
-        <div id="verdict" style="font-size:16px; font-weight:700; color:var(--cyan);">Community Approved</div>
+        <div class="card">
+          <div class="crit-header"><span class="crit-title">1. Idea & Value</span><span id="val1" class="crit-val">7</span></div>
+          <div class="crit-desc">Is the concept clear, original, and solving a real need?</div>
+          <input type="range" id="c1" min="1" max="10" value="7">
+        </div>
+
+        <div class="card">
+          <div class="crit-header"><span class="crit-title">2. Design & UX</span><span id="val2" class="crit-val">7</span></div>
+          <div class="crit-desc">How clean, intuitive, and pleasant does it look and feel?</div>
+          <input type="range" id="c2" min="1" max="10" value="7">
+        </div>
+
+        <div class="card">
+          <div class="crit-header"><span class="crit-title">3. Execution</span><span id="val3" class="crit-val">7</span></div>
+          <div class="crit-desc">Quality of implementation, polish, and attention to detail.</div>
+          <input type="range" id="c3" min="1" max="10" value="7">
+        </div>
+
+        <div class="card">
+          <div class="crit-header"><span class="crit-title">4. Overall Vibe</span><span id="val4" class="crit-val">7</span></div>
+          <div class="crit-desc">Your gut feeling — would you use this or share it with a friend?</div>
+          <input type="range" id="c4" min="1" max="10" value="7">
+        </div>
+
+        <div class="card">
+          <label for="comment" style="display:block; font-size:14px; font-weight:700; margin-bottom:8px;">Review note (optional)</label>
+          <textarea id="comment" placeholder="What stands out, and what could be improved?"></textarea>
+        </div>
+
+        <button type="button" class="btn-action ios-btn-tap" id="submitBtn">Submit Rating</button>
+        <button type="button" class="btn-secondary ios-btn-tap" id="shareBtn">Share Rating Link</button>
       </div>
-      <div style="display:flex; align-items:baseline; gap:4px;">
-        <div id="totalScore" class="big-num">7.0</div>
-        <div style="font-size:16px; color:var(--text-sub); font-weight:600;">/ 10</div>
-      </div>
     </div>
-
-    <div class="card">
-      <div class="crit-header"><span class="crit-title">1. Idea & Value</span><span id="val1" class="crit-val">7</span></div>
-      <div class="crit-desc">Is the concept clear, original, and solving a real need?</div>
-      <input type="range" id="c1" min="1" max="10" value="7">
-    </div>
-
-    <div class="card">
-      <div class="crit-header"><span class="crit-title">2. Design & UX</span><span id="val2" class="crit-val">7</span></div>
-      <div class="crit-desc">How clean, intuitive, and pleasant does it look and feel?</div>
-      <input type="range" id="c2" min="1" max="10" value="7">
-    </div>
-
-    <div class="card">
-      <div class="crit-header"><span class="crit-title">3. Execution</span><span id="val3" class="crit-val">7</span></div>
-      <div class="crit-desc">Quality of implementation, polish, and attention to detail.</div>
-      <input type="range" id="c3" min="1" max="10" value="7">
-    </div>
-
-    <div class="card">
-      <div class="crit-header"><span class="crit-title">4. Overall Vibe</span><span id="val4" class="crit-val">7</span></div>
-      <div class="crit-desc">Your gut feeling — would you use this or share it with a friend?</div>
-      <input type="range" id="c4" min="1" max="10" value="7">
-    </div>
-
-    <div class="card">
-      <label for="comment" style="display:block; font-size:14px; font-weight:700; margin-bottom:8px;">Review note (optional)</label>
-      <textarea id="comment" placeholder="What stands out, and what could be improved?"></textarea>
-    </div>
-
-    <button class="btn-action ios-btn-tap" id="submitBtn">Submit Rating</button>
-    <button class="btn-secondary ios-btn-tap" id="shareBtn">Share Rating Link</button>
-  </div>
+  </section>
 
   <!-- TAB 3: TOP -->
-  <div id="tab-top" class="tab-view">
-    <h1>Leaderboard</h1>
-    <p class="subtitle">Highest-rated projects voted by the community</p>
+  <section id="tab-top" class="tab-view">
+    <div class="page-header">
+      <h1>Leaderboard</h1>
+      <p class="subtitle">Highest-rated projects voted by the community</p>
+    </div>
     <div id="leaderboard-list"><div class="card"><p>Loading leaderboard...</p></div></div>
-  </div>
+  </section>
 
   <!-- TAB 4: CHIEF AI -->
-  <div id="tab-agent" class="tab-view">
-    <h1>Chief 🦝</h1>
-    <p class="subtitle">Your AI guide for ideas & feedback</p>
+  <section id="tab-agent" class="tab-view">
+    <div class="page-header">
+      <h1>Chief 🦝</h1>
+      <p class="subtitle">Your AI guide for pitching ideas and getting honest feedback</p>
+    </div>
 
     <div class="agent-chat-card">
       <div id="agent-messages" class="agent-messages">
@@ -1219,87 +1255,95 @@
       </div>
       <div class="agent-input-row">
         <textarea id="agentInput" rows="1" placeholder="Ask Chief anything..."></textarea>
-        <button id="agentSendBtn" class="agent-send-btn ios-btn-tap">➤</button>
+        <button type="button" id="agentSendBtn" class="agent-send-btn ios-btn-tap">➤</button>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- TAB 5: PROFILE & SUBMIT -->
-  <div id="tab-profile" class="tab-view">
-    <h1>Your Profile</h1>
-    <p class="subtitle">Community rank, stats, and project submission</p>
+  <section id="tab-profile" class="tab-view">
+    <div class="page-header">
+      <h1>Your Profile & Submission</h1>
+      <p class="subtitle">Manage your display name, check your rank, and drop a new idea</p>
+    </div>
 
-    <div class="card tier-none" id="profileCard">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
-        <div style="display:flex; align-items:center; gap:14px;">
-          <div id="myProfileAvatarBubble" style="width:54px; height:54px; border-radius:50%; background:rgba(255,255,255,0.06); border:2px solid var(--glass-border); display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--text-sub); transition:all 0.3s ease;">
-            👤
+    <div class="profile-layout">
+      <div>
+        <div class="card tier-none" id="profileCard">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div id="myProfileAvatarBubble" style="width:54px; height:54px; border-radius:50%; background:rgba(255,255,255,0.06); border:2px solid var(--glass-border); display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--text-sub); transition:all 0.3s ease;">
+                👤
+              </div>
+              <div>
+                <h3 id="user_display_name" style="font-size:18px; margin-bottom:2px;">Guest Member</h3>
+                <span class="badge" id="profileStatusBadge" style="margin-top:2px; display:inline-block; padding:4px 10px; font-size:10px;">No Rank</span>
+              </div>
+            </div>
+            <div id="tierIcon" style="font-size:22px; opacity:0.85;">✦</div>
           </div>
-          <div>
-            <h3 id="user_display_name" style="font-size:18px; margin-bottom:2px;">Guest Member</h3>
-            <span class="badge" id="profileStatusBadge" style="margin-top:2px; display:inline-block;">No Rank</span>
+          <div class="project-tags">
+            <span class="tag ios-btn-tap" id="t_stat_reviews" onclick="openMyContentModal('reviews')">Ratings: —</span>
+            <span class="tag ios-btn-tap" id="t_stat_projects" onclick="openMyContentModal('projects')">Submitted: —</span>
           </div>
         </div>
-        <div id="tierIcon" style="font-size:22px; opacity:0.85;">✦</div>
-      </div>
-      <div class="project-tags">
-        <span class="tag ios-btn-tap" id="t_stat_reviews" onclick="openMyContentModal('reviews')">Ratings: —</span>
-        <span class="tag ios-btn-tap" id="t_stat_projects" onclick="openMyContentModal('projects')">Submitted: —</span>
-      </div>
-    </div>
 
-    <div class="card">
-      <h3 style="margin-bottom:6px;">Display Name</h3>
-      <p style="margin-bottom:14px; font-size:13px;">Choose how your name appears on your projects and reviews.</p>
-      <label for="customHandleInput" style="display:block; font-size:12px; font-weight:700; margin-bottom:6px;">Nickname</label>
-      <input type="text" id="customHandleInput" maxlength="30" placeholder="e.g. Alex_Builds" style="margin-bottom:14px;">
-      <button class="btn-small ios-btn-tap" style="width:100%; padding:13px; font-size:13px;" onclick="saveCustomProfile()">Save Nickname</button>
-    </div>
-
-    <div class="card" style="margin-bottom:30px;">
-      <h3>Drop Your Idea</h3>
-      <p>Want honest ratings and feedback from real people? Submit your app, website, or concept to the showcase.</p>
-      <label for="newProjName" style="display:block; font-size:13px; font-weight:700; margin-bottom:6px;">Project Name</label>
-      <input type="text" id="newProjName" maxlength="80" placeholder="e.g. Pulse Habit Tracker" style="margin-bottom:12px;">
-      <label for="newProjDesc" style="display:block; font-size:13px; font-weight:700; margin-bottom:6px;">Description</label>
-      <textarea id="newProjDesc" maxlength="500" placeholder="A couple of sentences explaining what it does and why it's cool..." style="margin-bottom:12px;"></textarea>
-      
-      <label style="display:block; font-size:13px; font-weight:700; margin-bottom:6px;">Screenshots (up to 3)</label>
-      <input type="file" id="screenshotInput" accept="image/*" multiple style="display:none;" onchange="handleScreenshotSelect(event)">
-      
-      <div id="uploadZone" class="upload-zone" onclick="document.getElementById('screenshotInput').click()">
-        <span style="font-size:22px;">🖼️</span>
-        <span id="uploadZoneTitle" style="font-size:13px; font-weight:700; color:var(--text-main);">Add screenshots (up to 3)</span>
-        <span style="font-size:11px; color:var(--text-sub);">Automatically compressed for fast loading</span>
+        <div class="card">
+          <h3 style="margin-bottom:6px;">Display Name</h3>
+          <p style="margin-bottom:14px; font-size:13px;">Choose how your name appears on your projects and reviews.</p>
+          <label for="customHandleInput" style="display:block; font-size:12px; font-weight:700; margin-bottom:6px;">Nickname</label>
+          <input type="text" id="customHandleInput" maxlength="30" placeholder="e.g. Alex_Builds" style="margin-bottom:14px;">
+          <button type="button" class="btn-small ios-btn-tap" style="width:100%; padding:12px; font-size:13px;" onclick="saveCustomProfile()">Save Nickname</button>
+        </div>
       </div>
 
-      <div id="uploadGalleryGrid" class="upload-gallery-grid" style="display:none;"></div>
+      <div>
+        <div class="card" style="margin-bottom:24px;">
+          <h3>Drop Your Idea</h3>
+          <p>Want honest ratings and feedback from real people? Submit your app, website, or concept to the showcase.</p>
+          <label for="newProjName" style="display:block; font-size:13px; font-weight:700; margin-bottom:6px;">Project Name</label>
+          <input type="text" id="newProjName" maxlength="80" placeholder="e.g. Pulse Habit Tracker" style="margin-bottom:12px;">
+          <label for="newProjDesc" style="display:block; font-size:13px; font-weight:700; margin-bottom:6px;">Description</label>
+          <textarea id="newProjDesc" maxlength="500" placeholder="A couple of sentences explaining what it does and why it's cool..." style="margin-bottom:12px;"></textarea>
+          
+          <label style="display:block; font-size:13px; font-weight:700; margin-bottom:6px;">Screenshots (up to 3)</label>
+          <input type="file" id="screenshotInput" accept="image/*" multiple style="display:none;" onchange="handleScreenshotSelect(event)">
+          
+          <div id="uploadZone" class="upload-zone" onclick="document.getElementById('screenshotInput').click()">
+            <span style="font-size:22px;">🖼️</span>
+            <span id="uploadZoneTitle" style="font-size:13px; font-weight:700; color:var(--text-main);">Add screenshots (up to 3)</span>
+            <span style="font-size:11px; color:var(--text-sub);">Automatically compressed for fast loading</span>
+          </div>
 
-      <button class="btn-action ios-btn-tap" style="padding:15px;" id="submitProjBtn">Publish Project</button>
+          <div id="uploadGalleryGrid" class="upload-gallery-grid" style="display:none;"></div>
+
+          <button type="button" class="btn-action ios-btn-tap" style="padding:15px;" id="submitProjBtn">Publish Project</button>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </div>
 
 <!-- МОБИЛЬНАЯ ПАНЕЛЬ НАВИГАЦИИ -->
-<nav class="bottom-nav">
+<nav class="bottom-nav" aria-label="Mobile Navigation">
   <div id="nav-indicator" class="nav-indicator"></div>
-  <button class="nav-btn ios-btn-tap active" onclick="switchTab('feed')">
+  <button type="button" class="nav-btn ios-btn-tap active" onclick="switchTab('feed')">
     <svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
     <span class="nav-label">Feed</span>
   </button>
-  <button class="nav-btn ios-btn-tap" onclick="switchTab('scoring')">
+  <button type="button" class="nav-btn ios-btn-tap" onclick="switchTab('scoring')">
     <svg class="nav-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     <span class="nav-label">Rate</span>
   </button>
-  <button class="nav-btn ios-btn-tap" onclick="switchTab('top')">
+  <button type="button" class="nav-btn ios-btn-tap" onclick="switchTab('top')">
     <svg class="nav-icon" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M4 22h16"/><path d="M6 3h12v7a6 6 0 0 1-12 0V3z"/></svg>
     <span class="nav-label">Top</span>
   </button>
-  <button class="nav-btn ios-btn-tap" onclick="switchTab('agent')">
+  <button type="button" class="nav-btn ios-btn-tap" onclick="switchTab('agent')">
     <svg class="nav-icon" viewBox="0 0 24 24"><path d="M4 8.5 7.5 4 10 7.5"/><path d="M20 8.5 16.5 4 14 7.5"/><path d="M3.5 14.5c0-4.42 3.8-8 8.5-8s8.5 3.58 8.5 8c0 4.2-3.4 7.5-8.5 7.5s-8.5-3.3-8.5-7.5Z"/><circle cx="8.5" cy="13.5" r="1.25" fill="currentColor"/><circle cx="15.5" cy="13.5" r="1.25" fill="currentColor"/></svg>
     <span class="nav-label">Chief</span>
   </button>
-  <button class="nav-btn ios-btn-tap" onclick="switchTab('profile')">
+  <button type="button" class="nav-btn ios-btn-tap" onclick="switchTab('profile')">
     <svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span class="nav-label">Profile</span>
   </button>
@@ -1310,7 +1354,7 @@
   <div class="app-modal-sheet">
     <div class="app-modal-header">
       <h3 id="reviewsModalTitle">Reviews</h3>
-      <button class="app-modal-close ios-btn-tap" onclick="closeReviews()">&times;</button>
+      <button type="button" class="app-modal-close ios-btn-tap" onclick="closeReviews()">&times;</button>
     </div>
     <div id="reviews-modal-body" class="app-modal-body"><p>Loading...</p></div>
   </div>
@@ -1320,7 +1364,7 @@
   <div class="app-modal-sheet">
     <div class="app-modal-header">
       <h3 id="myContentModalTitle">My Activity</h3>
-      <button class="app-modal-close ios-btn-tap" onclick="closeMyContentModal()">&times;</button>
+      <button type="button" class="app-modal-close ios-btn-tap" onclick="closeMyContentModal()">&times;</button>
     </div>
     <div id="my-content-modal-body" class="app-modal-body"></div>
   </div>
@@ -1330,7 +1374,7 @@
   <div class="app-modal-sheet">
     <div class="app-modal-header">
       <h3 id="userProfileModalTitle">Member Profile</h3>
-      <button class="app-modal-close ios-btn-tap" onclick="closeUserProfileModal()">&times;</button>
+      <button type="button" class="app-modal-close ios-btn-tap" onclick="closeUserProfileModal()">&times;</button>
     </div>
     <div id="user-profile-modal-body" class="app-modal-body"></div>
   </div>
@@ -1395,29 +1439,6 @@
   }
 
   applyTheme(currentTheme);
-
-  function init3DTilt() {
-    document.querySelectorAll('.card').forEach(card => {
-      if (card.dataset.tiltBound) return;
-      card.dataset.tiltBound = '1';
-
-      card.addEventListener('mousemove', (e) => {
-        if (e.target.closest('input, textarea, button, .screenshots-carousel')) return;
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -3;
-        const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 3;
-        card.classList.add('tilting');
-        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.classList.remove('tilting');
-        card.style.transform = '';
-      });
-    });
-  }
 
   document.addEventListener('dblclick', (e) => {
     const card = e.target.closest('#feed-list .card');
@@ -1706,20 +1727,18 @@
       const carouselHtml = buildCarouselHtml(screens, safeDisplayName);
 
       return `
-        <div class="card">
+        <article class="card">
           ${authorBadgeHtml}
           <h3>${safeDisplayName}</h3>
           <p>${escapeHtml(p.description)}</p>
           ${carouselHtml}
           <div class="card-footer">
             <span class="read-reviews-btn ios-btn-tap" onclick="openReviews('${safeOriginalNameJs}')">Read reviews →</span>
-            <button class="btn-small ios-btn-tap" onclick="startScoring('${safeOriginalNameJs}')">Rate</button>
+            <button type="button" class="btn-small ios-btn-tap" onclick="startScoring('${safeOriginalNameJs}')">Rate</button>
           </div>
-        </div>
+        </article>
       `;
     }).join('');
-
-    init3DTilt();
 
     const urlParams = new URLSearchParams(window.location.search);
     const sharedProj = urlParams.get('project');
@@ -1845,4 +1864,434 @@
 
   function renderProfileStats() {
     const r = profileStats.reviews_count;
-    const p
+    const p = profileStats.projects_submitted;
+    const revEl = document.getElementById('t_stat_reviews');
+    const projEl = document.getElementById('t_stat_projects');
+    if (revEl) revEl.textContent = `Ratings: ${r === null ? '—' : r}`;
+    if (projEl) projEl.textContent = `Submitted: ${p === null ? '—' : p}`;
+  }
+
+  async function fetchProfile() {
+    document.getElementById('user_display_name').textContent = guestUser.guestName;
+    document.getElementById('customHandleInput').value = guestUser.guestName;
+
+    try {
+      const url = `${API_URL}/api/profile?guestId=${encodeURIComponent(guestUser.guestId)}&guestName=${encodeURIComponent(guestUser.guestName)}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.available && data.user) {
+        const u = data.user;
+        profileStats.reviews_count = data.reviews_count || 0;
+        profileStats.projects_submitted = data.projects_submitted || 0;
+
+        const displayName = u.custom_handle || u.name || guestUser.guestName;
+        document.getElementById('user_display_name').textContent = displayName;
+        document.getElementById('customHandleInput').value = displayName;
+
+        const card = document.getElementById('profileCard');
+        const badge = document.getElementById('profileStatusBadge');
+        const icon = document.getElementById('tierIcon');
+        const avatarBubble = document.getElementById('myProfileAvatarBubble');
+        const count = profileStats.reviews_count;
+
+        card.classList.remove('tier-none', 'tier-bronze', 'tier-silver', 'tier-gold', 'tier-emerald');
+
+        if (count >= 37) {
+          card.classList.add('tier-emerald');
+          badge.textContent = 'Emerald Rank';
+          badge.style.color = 'var(--emerald)';
+          badge.style.borderColor = 'rgba(0, 229, 153, 0.4)';
+          badge.style.background = 'rgba(0, 229, 153, 0.12)';
+          icon.textContent = '💎';
+          avatarBubble.style.borderColor = 'var(--emerald)';
+          avatarBubble.style.color = 'var(--emerald)';
+        } else if (count >= 17) {
+          card.classList.add('tier-gold');
+          badge.textContent = 'Gold Rank';
+          badge.style.color = 'var(--gold)';
+          badge.style.borderColor = 'rgba(255, 183, 3, 0.4)';
+          badge.style.background = 'rgba(255, 183, 3, 0.12)';
+          icon.textContent = '🥇';
+          avatarBubble.style.borderColor = 'var(--gold)';
+          avatarBubble.style.color = 'var(--gold)';
+        } else if (count >= 9) {
+          card.classList.add('tier-silver');
+          badge.textContent = 'Silver Rank';
+          badge.style.color = 'var(--silver)';
+          badge.style.borderColor = 'rgba(148, 163, 184, 0.4)';
+          badge.style.background = 'rgba(148, 163, 184, 0.12)';
+          icon.textContent = '🥈';
+          avatarBubble.style.borderColor = 'var(--silver)';
+          avatarBubble.style.color = 'var(--silver)';
+        } else if (count >= 3) {
+          card.classList.add('tier-bronze');
+          badge.textContent = 'Bronze Rank';
+          badge.style.color = 'var(--bronze)';
+          badge.style.borderColor = 'rgba(205, 127, 50, 0.4)';
+          badge.style.background = 'rgba(205, 127, 50, 0.12)';
+          icon.textContent = '🥉';
+          avatarBubble.style.borderColor = 'var(--bronze)';
+          avatarBubble.style.color = 'var(--bronze)';
+        } else {
+          card.classList.add('tier-none');
+          badge.textContent = 'No Rank';
+          badge.style.color = 'var(--text-sub)';
+          badge.style.borderColor = 'var(--glass-border)';
+          badge.style.background = 'rgba(255, 255, 255, 0.06)';
+          icon.textContent = '✦';
+          avatarBubble.style.borderColor = 'var(--glass-border)';
+          avatarBubble.style.color = 'var(--text-sub)';
+        }
+      }
+    } catch (err) {}
+    renderProfileStats();
+  }
+
+  async function saveCustomProfile() {
+    const newName = document.getElementById('customHandleInput').value.trim();
+    if (!newName) {
+      showToast('Enter a valid nickname.');
+      return;
+    }
+
+    localStorage.setItem('openhall_guest_name', newName);
+    guestUser.guestName = newName;
+
+    try {
+      await fetch(`${API_URL}/api/profile/custom`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          guestId: guestUser.guestId,
+          guestName: newName,
+          custom_handle: newName
+        })
+      });
+      showToast('Nickname updated!');
+      document.getElementById('user_display_name').textContent = newName;
+      fetchFeed();
+    } catch (e) {
+      showToast('Failed to save profile.');
+    }
+  }
+
+  function moveNavIndicator(tabId) {
+    const indicator = document.getElementById('nav-indicator');
+    if (!indicator) return;
+    const index = ['feed', 'scoring', 'top', 'agent', 'profile'].indexOf(tabId);
+    if (index !== -1) indicator.style.transform = `translateX(${index * 100}%)`;
+  }
+
+  function switchTab(tabId) {
+    currentTab = tabId;
+    document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.desktop-nav-btn').forEach(el => el.classList.remove('active'));
+
+    document.getElementById(`tab-${tabId}`)?.classList.add('active');
+    const idx = ['feed', 'scoring', 'top', 'agent', 'profile'].indexOf(tabId);
+    if (idx !== -1) {
+      document.querySelectorAll('.nav-btn')[idx]?.classList.add('active');
+      document.querySelectorAll('.desktop-nav-btn')[idx]?.classList.add('active');
+      moveNavIndicator(tabId);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (tabId === 'top') fetchLeaderboard();
+    if (tabId === 'profile') fetchProfile();
+  }
+
+  function interpolateColor(color1, color2, factor) {
+    const r = Math.round(color1[0] + factor * (color2[0] - color1[0]));
+    const g = Math.round(color1[1] + factor * (color2[1] - color1[1]));
+    const b = Math.round(color1[2] + factor * (color2[2] - color1[2]));
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  const sliders = [
+    { el: document.getElementById('c1'), valEl: document.getElementById('val1') },
+    { el: document.getElementById('c2'), valEl: document.getElementById('val2') },
+    { el: document.getElementById('c3'), valEl: document.getElementById('val3') },
+    { el: document.getElementById('c4'), valEl: document.getElementById('val4') }
+  ];
+
+  const totalEl = document.getElementById('totalScore');
+  const verdictEl = document.getElementById('verdict');
+  const submitBtn = document.getElementById('submitBtn');
+  const shareBtn = document.getElementById('shareBtn');
+  const scoreBannerBox = document.getElementById('scoreBannerBox');
+
+  function calculate() {
+    let sum = 0;
+    sliders.forEach(item => {
+      const v = Number(item.el.value);
+      item.valEl.textContent = v;
+      sum += v;
+    });
+
+    const avgNum = sum / sliders.length;
+    const avg = avgNum.toFixed(1);
+    totalEl.textContent = avg;
+
+    let dynamicAccentColor = null;
+
+    if (avgNum >= 7.0) {
+      const factor = Math.min(Math.max((avgNum - 7.0) / 3.0, 0), 1);
+      dynamicAccentColor = interpolateColor([0, 229, 153], [255, 183, 3], factor);
+      
+      document.documentElement.style.setProperty('--slider-thumb-color', dynamicAccentColor);
+      totalEl.style.backgroundImage = `linear-gradient(135deg, ${dynamicAccentColor}, #fb8500)`;
+      scoreBannerBox.style.borderColor = dynamicAccentColor;
+      scoreBannerBox.style.boxShadow = `0 8px 26px rgba(255, 183, 3, ${(factor * 0.25).toFixed(2)})`;
+    } else {
+      document.documentElement.style.removeProperty('--slider-thumb-color');
+      totalEl.style.backgroundImage = 'var(--grad-main)';
+      scoreBannerBox.style.borderColor = 'var(--glass-border)';
+      scoreBannerBox.style.boxShadow = '0 10px 28px var(--shadow-color), inset 0 1px 1px var(--glass-highlight)';
+    }
+
+    if (avg >= 9.0) {
+      verdictEl.textContent = "Community Favorite";
+      verdictEl.style.color = dynamicAccentColor || 'var(--gold)';
+    } else if (avg >= 7.0) {
+      verdictEl.textContent = "Community Approved";
+      verdictEl.style.color = dynamicAccentColor || 'var(--cyan)';
+    } else if (avg >= 5.0) {
+      verdictEl.textContent = "Promising Idea";
+      verdictEl.style.color = 'var(--text-sub)';
+    } else {
+      verdictEl.textContent = "Needs Polish";
+      verdictEl.style.color = '#ef4444';
+    }
+
+    sliders.forEach(item => {
+      const v = Number(item.el.value);
+      if (v >= 8.0) {
+        const factorItem = (v - 8.0) / 2.0;
+        const colorItem = interpolateColor([0, 229, 153], [255, 183, 3], factorItem);
+        item.valEl.style.color = colorItem;
+        item.valEl.style.borderColor = colorItem;
+        item.valEl.style.backgroundColor = `rgba(255, 183, 3, ${(factorItem * 0.14).toFixed(2)})`;
+      } else {
+        item.valEl.style.color = '';
+        item.valEl.style.borderColor = '';
+        item.valEl.style.backgroundColor = '';
+      }
+    });
+  }
+
+  sliders.forEach(item => item.el.addEventListener('input', calculate));
+
+  let isSubmitting = false;
+  submitBtn.addEventListener('click', async () => {
+    if (isSubmitting) return;
+    isSubmitting = true;
+
+    const scoreVal = parseFloat(totalEl.textContent);
+    const verdictVal = verdictEl.textContent;
+
+    const payload = {
+      guestId: guestUser.guestId,
+      guestName: guestUser.guestName,
+      project: activeProject,
+      score: scoreVal,
+      verdict: verdictVal,
+      comment: document.getElementById('comment').value
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    try {
+      const res = await fetch(`${API_URL}/api/review`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+      showToast(`Rating for "${activeProject}" sent for review!`);
+      shareBtn.style.display = 'block';
+      shareBtn.textContent = `Copy Link to Rate "${activeProject}"`;
+    } catch (err) {
+      showToast("Failed to save rating. Check your connection.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = `Submit Rating for "${activeProject}"`;
+      isSubmitting = false;
+    }
+  });
+
+  shareBtn.addEventListener('click', async () => {
+    const scoreVal = parseFloat(totalEl.textContent);
+    const baseUrl = window.location.origin + window.location.pathname;
+    const directUrl = `${baseUrl}?project=${encodeURIComponent(activeProject)}`;
+    const shareText = `I rated "${activeProject}" ${scoreVal}/10 on Open Hall! Rate it yourself: ${directUrl}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: activeProject, text: shareText, url: directUrl });
+        return;
+      } catch (e) {}
+    }
+
+    try {
+      await navigator.clipboard.writeText(directUrl);
+      showToast('Direct project link copied to clipboard!');
+    } catch (e) {
+      showToast(directUrl);
+    }
+  });
+
+  const submitProjBtn = document.getElementById('submitProjBtn');
+  let isSubmittingProj = false;
+  submitProjBtn.addEventListener('click', async () => {
+    if (isSubmittingProj) return;
+
+    const nameEl = document.getElementById('newProjName');
+    const descEl = document.getElementById('newProjDesc');
+
+    const name = nameEl.value.trim();
+    const description = descEl.value.trim();
+
+    if (!name || !description) {
+      showToast('Please enter both a project name and description.');
+      return;
+    }
+
+    isSubmittingProj = true;
+    submitProjBtn.disabled = true;
+    submitProjBtn.textContent = 'Publishing...';
+
+    try {
+      const res = await fetch(`${API_URL}/api/projects`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          guestId: guestUser.guestId,
+          guestName: guestUser.guestName,
+          name,
+          description,
+          screenshots: uploadedScreenshots,
+          screenshot: uploadedScreenshots[0] || null
+        })
+      });
+
+      if (res.status === 409) {
+        showToast('A project with this name already exists.');
+      } else if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      } else {
+        showToast(`"${name}" submitted! It will appear once approved.`);
+        nameEl.value = '';
+        descEl.value = '';
+        clearAllScreenshots();
+        switchTab('feed');
+      }
+    } catch (err) {
+      showToast('Submission failed. Please try again.');
+    } finally {
+      submitProjBtn.disabled = false;
+      submitProjBtn.textContent = 'Publish Project';
+      isSubmittingProj = false;
+    }
+  });
+
+  function startScoring(projName) {
+    activeProject = projName;
+    document.getElementById('scoringTargetName').textContent = activeProject;
+    document.getElementById('t_score_title').textContent = activeProject;
+
+    const projObj = allProjectsData.find(p => p.name === projName);
+    const carouselBox = document.getElementById('scoringCarouselBox');
+    const screens = projObj ? getProjectScreenshotsList(projObj) : [];
+
+    if (screens.length > 0 && carouselBox) {
+      carouselBox.className = `screenshots-carousel ${screens.length > 1 ? 'multi-slides' : ''}`;
+      carouselBox.innerHTML = screens.map((src, i) => `
+        <div class="carousel-slide" onclick="openLightbox('${src}')">
+          <img src="${src}" alt="Screenshot ${i + 1}">
+          ${screens.length > 1 ? `<span class="slide-counter-badge">${i + 1} / ${screens.length}</span>` : ''}
+          <span class="screenshot-zoom-hint">🔍 Expand</span>
+        </div>
+      `).join('');
+      carouselBox.style.display = 'flex';
+    } else if (carouselBox) {
+      carouselBox.style.display = 'none';
+      carouselBox.innerHTML = '';
+    }
+
+    shareBtn.style.display = 'none';
+    const sBtn = document.getElementById('submitBtn');
+    if (sBtn) sBtn.textContent = `Submit Rating for "${activeProject}"`;
+    switchTab('scoring');
+  }
+
+  const agentMessagesEl = document.getElementById('agent-messages');
+  const agentInputEl = document.getElementById('agentInput');
+  const agentSendBtn = document.getElementById('agentSendBtn');
+  let agentHistory = [];
+  let isAgentSending = false;
+
+  function appendAgentMessage(role, text) {
+    const bubble = document.createElement('div');
+    bubble.className = role === 'user' ? 'agent-msg agent-msg-user' : 'agent-msg agent-msg-bot';
+    bubble.textContent = text;
+    agentMessagesEl.appendChild(bubble);
+    agentMessagesEl.scrollTop = agentMessagesEl.scrollHeight;
+    return bubble;
+  }
+
+  async function sendAgentMessage() {
+    if (isAgentSending) return;
+    const text = agentInputEl.value.trim();
+    if (!text) return;
+
+    isAgentSending = true;
+    appendAgentMessage('user', text);
+    agentHistory.push({ role: 'user', content: text });
+    agentInputEl.value = '';
+    agentInputEl.style.height = 'auto';
+    agentSendBtn.disabled = true;
+
+    try {
+      const res = await fetch(`${API_URL}/api/agent/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: agentHistory.slice(-12)
+        })
+      });
+      const data = await res.json();
+
+      if (data.available && data.reply) {
+        appendAgentMessage('bot', data.reply);
+        agentHistory.push({ role: 'assistant', content: data.reply });
+      } else {
+        appendAgentMessage('bot', 'Could not get a response. Please try again.');
+      }
+    } catch (err) {
+      appendAgentMessage('bot', 'Connection issue. Please try again.');
+    } finally {
+      agentSendBtn.disabled = false;
+      isAgentSending = false;
+    }
+  }
+
+  agentSendBtn.addEventListener('click', sendAgentMessage);
+  agentInputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendAgentMessage();
+    }
+  });
+
+  calculate();
+  renderProfileStats();
+  fetchFeed();
+  fetchProfile();
+</script>
+</body>
+</html>
