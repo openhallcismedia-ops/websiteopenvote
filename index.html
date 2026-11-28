@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#070a0f" id="meta-theme-color">
-  <title>Open Hall — Community Idea & App Ratings</title>
+  <meta name="theme-color" content="#06090e" id="meta-theme-color">
+  <title>Open Hall — Live Community Idea & App Ratings</title>
   <meta name="description" content="Discover, rate, and review bold ideas, apps, and creative projects from 1 to 10.">
   <style>
     :root {
-      --bg: #06090e;
+      --bg: #05080d;
       --glass-bg: rgba(255, 255, 255, 0.045);
-      --glass-bg-elevated: rgba(255, 255, 255, 0.08);
+      --glass-bg-elevated: rgba(255, 255, 255, 0.085);
       --glass-border: rgba(255, 255, 255, 0.13);
-      --glass-border-top: rgba(255, 255, 255, 0.3);
-      --glass-highlight: rgba(255, 255, 255, 0.22);
+      --glass-border-top: rgba(255, 255, 255, 0.32);
+      --glass-highlight: rgba(255, 255, 255, 0.24);
       --glass-rim: rgba(255, 255, 255, 0.05);
       --emerald: #00e599;
       --cyan: #00b4d8;
@@ -25,23 +25,24 @@
       --text-main: #ffffff;
       --text-sub: #94a3b8;
       --track-bg: rgba(255, 255, 255, 0.12);
-      --input-bg: rgba(0, 0, 0, 0.28);
-      --nav-bg: rgba(12, 17, 27, 0.78);
+      --input-bg: rgba(0, 0, 0, 0.32);
+      --nav-bg: rgba(12, 17, 27, 0.8);
       --modal-bg: rgba(15, 21, 33, 0.94);
       --tag-bg: rgba(255, 255, 255, 0.07);
       --tag-border: rgba(255, 255, 255, 0.14);
       --tag-color: #cbd5e1;
-      --shadow-color: rgba(0, 0, 0, 0.48);
+      --shadow-color: rgba(0, 0, 0, 0.52);
       --spring-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --smooth-ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     html.light-theme, body.light-theme {
       --bg: #eef2f6;
-      --glass-bg: rgba(255, 255, 255, 0.65);
-      --glass-bg-elevated: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.8);
+      --glass-bg: rgba(255, 255, 255, 0.66);
+      --glass-bg-elevated: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.82);
       --glass-border-top: rgba(255, 255, 255, 1);
-      --glass-highlight: rgba(255, 255, 255, 0.95);
+      --glass-highlight: rgba(255, 255, 255, 0.96);
       --glass-rim: rgba(15, 23, 42, 0.05);
       --emerald: #059669;
       --cyan: #0284c7;
@@ -53,13 +54,13 @@
       --text-main: #0f172a;
       --text-sub: #475569;
       --track-bg: rgba(15, 23, 42, 0.12);
-      --input-bg: rgba(255, 255, 255, 0.72);
-      --nav-bg: rgba(255, 255, 255, 0.82);
+      --input-bg: rgba(255, 255, 255, 0.78);
+      --nav-bg: rgba(255, 255, 255, 0.84);
       --modal-bg: rgba(255, 255, 255, 0.96);
-      --tag-bg: rgba(255, 255, 255, 0.72);
+      --tag-bg: rgba(255, 255, 255, 0.76);
       --tag-border: rgba(15, 23, 42, 0.12);
       --tag-color: #334155;
-      --shadow-color: rgba(15, 23, 42, 0.07);
+      --shadow-color: rgba(15, 23, 42, 0.08);
     }
 
     * {
@@ -80,7 +81,7 @@
       min-height: 100vh;
       background-color: var(--bg);
       color: var(--text-main);
-      padding-top: 20px;
+      padding-top: 18px;
       padding-left: 16px;
       padding-right: 16px;
       padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px));
@@ -89,27 +90,56 @@
       align-items: center;
       position: relative;
       overflow-x: hidden;
-      transition: background-color 0.35s ease, color 0.35s ease;
+      transition: background-color 0.4s ease, color 0.35s ease;
     }
 
     @media (min-width: 768px) {
       body {
-        padding-top: 28px;
+        padding-top: 24px;
         padding-left: 28px;
         padding-right: 28px;
         padding-bottom: 64px;
       }
     }
 
+    /* Тонкая сетка на фоне для ощущения живого веб-приложения, а не пустого лендинга */
     .fixed-app-background {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
       background-color: var(--bg);
+      background-image:
+        radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: 28px 28px;
       z-index: -10;
       pointer-events: none;
-      transition: background-color 0.35s ease;
+      transition: background-color 0.4s ease;
+    }
+
+    body.light-theme .fixed-app-background {
+      background-image:
+        radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+    }
+
+    /* Световое пятно, плавно следующее за курсором */
+    .cursor-aura {
+      position: fixed;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 229, 153, 0.09) 0%, rgba(0, 180, 216, 0.04) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: -2;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    @media (hover: hover) {
+      .cursor-aura {
+        opacity: 1;
+      }
     }
 
     .bg-blob {
@@ -155,13 +185,13 @@
 
     @keyframes floatBlobs {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, 35px) scale(1.06); }
-      100% { transform: translate(-20px, -25px) scale(0.96); }
+      50% { transform: translate(35px, 40px) scale(1.08); }
+      100% { transform: translate(-25px, -30px) scale(0.95); }
     }
 
     .container {
       width: 100%;
-      max-width: 960px;
+      max-width: 980px;
       position: relative;
       z-index: 1;
       flex: 1;
@@ -169,21 +199,30 @@
       flex-direction: column;
     }
 
-    /* ВЕРХНЯЯ ПАНЕЛЬ САЙТА */
+    /* ВЕРХНЯЯ ПАНЕЛЬ (STICKY APP HEADER) */
     .top-bar {
+      position: sticky;
+      top: 14px;
+      z-index: 900;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 32px;
-      padding: 10px 14px;
+      gap: 12px;
+      margin-bottom: 26px;
+      padding: 8px 12px;
       border-radius: 22px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(26px) saturate(180%);
-      -webkit-backdrop-filter: blur(26px) saturate(180%);
+      background: var(--nav-bg);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
       border: 1px solid var(--glass-border);
       border-top-color: var(--glass-border-top);
-      box-shadow: 0 10px 28px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
+      box-shadow: 0 12px 32px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .brand-link {
@@ -201,6 +240,12 @@
       border-radius: 15px;
       cursor: pointer;
       flex-shrink: 0;
+      transition: transform 0.25s var(--spring-ease), box-shadow 0.25s ease;
+    }
+
+    .brand-link:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 18px rgba(0, 229, 153, 0.25);
     }
 
     .brand-dot {
@@ -209,6 +254,31 @@
       border-radius: 50%;
       background: var(--emerald);
       box-shadow: 0 0 10px var(--emerald);
+      animation: pulseLive 2.2s infinite ease-in-out;
+    }
+
+    @keyframes pulseLive {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.45); opacity: 0.65; }
+    }
+
+    .live-pill {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-sub);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      padding: 5px 10px;
+      border-radius: 12px;
+    }
+
+    @media (min-width: 900px) {
+      .live-pill {
+        display: inline-flex;
+      }
     }
 
     body.light-theme .brand-link {
@@ -217,7 +287,7 @@
       border-color: rgba(5, 150, 105, 0.28);
     }
 
-    /* ДЕСКТОПНАЯ НАВИГАЦИЯ В ШАПКЕ */
+    /* ДЕСКТОПНАЯ НАВИГАЦИЯ СО СКОЛЬЗЯЩЕЙ КАПСУЛОЙ */
     .desktop-nav {
       display: none;
     }
@@ -226,44 +296,65 @@
       .desktop-nav {
         display: flex;
         align-items: center;
-        gap: 4px;
+        position: relative;
+        padding: 3px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .desktop-nav-pill {
+        position: absolute;
+        top: 3px;
+        bottom: 3px;
+        left: 3px;
+        border-radius: 13px;
+        background: var(--glass-bg-elevated);
+        border: 1px solid var(--glass-border);
+        border-top-color: var(--glass-border-top);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), inset 0 1px 1px var(--glass-highlight);
+        transition: transform 0.38s var(--spring-ease), width 0.38s var(--spring-ease);
+        pointer-events: none;
+        z-index: 0;
       }
 
       .desktop-nav-btn {
+        position: relative;
+        z-index: 1;
         background: transparent;
-        border: 1px solid transparent;
+        border: none;
         color: var(--text-sub);
-        padding: 8px 15px;
-        border-radius: 14px;
+        padding: 7px 14px;
+        border-radius: 13px;
         font-size: 13px;
         font-weight: 700;
         cursor: pointer;
-        transition: all 0.22s ease;
+        transition: color 0.22s ease, transform 0.2s var(--spring-ease);
+        white-space: nowrap;
       }
 
       .desktop-nav-btn:hover {
         color: var(--text-main);
-        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .desktop-nav-btn:active {
+        transform: scale(0.95);
       }
 
       .desktop-nav-btn.active {
-        color: var(--text-main);
-        background: var(--glass-bg-elevated);
-        border-color: var(--glass-border);
-        border-top-color: var(--glass-border-top);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16), inset 0 1px 1px var(--glass-highlight);
+        color: var(--emerald);
       }
     }
 
-    /* КНОПКИ И ИНТЕРАКТИВНЫЕ ЭЛЕМЕНТЫ */
-    .ios-btn-tap, .btn-small, .btn-action, .btn-secondary, .read-reviews-btn, .theme-toggle-btn, .nav-btn, .rank-item, .upload-zone {
+    /* КНОПКИ И МИКРО-АНИМАЦИИ */
+    .ios-btn-tap, .btn-small, .btn-action, .btn-secondary, .read-reviews-btn, .theme-toggle-btn, .nav-btn, .rank-item, .upload-zone, .filter-chip, .upvote-btn {
       cursor: pointer;
       touch-action: manipulation;
-      transition: transform 0.22s var(--spring-ease), opacity 0.2s ease, box-shadow 0.22s ease, filter 0.2s ease, background 0.2s ease;
+      transition: transform 0.24s var(--spring-ease), opacity 0.2s ease, box-shadow 0.24s ease, filter 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
 
-    .touch-active, .ios-btn-tap:active, .btn-small:active, .btn-action:active, .btn-secondary:active, .read-reviews-btn:active, .theme-toggle-btn:active, .nav-btn:active, .rank-item:active, .upload-zone:active {
-      transform: scale(0.96) !important;
+    .touch-active, .ios-btn-tap:active, .btn-small:active, .btn-action:active, .btn-secondary:active, .read-reviews-btn:active, .theme-toggle-btn:active, .nav-btn:active, .rank-item:active, .upload-zone:active, .filter-chip:active, .upvote-btn:active {
+      transform: scale(0.94) !important;
     }
 
     .theme-toggle-btn {
@@ -282,22 +373,28 @@
       box-shadow: inset 0 1px 1px var(--glass-highlight);
     }
 
+    .theme-toggle-btn:hover {
+      transform: rotate(18deg) scale(1.06);
+    }
+
     .btn-small {
-      background: linear-gradient(180deg, rgba(0, 229, 153, 0.22) 0%, rgba(0, 229, 153, 0.08) 100%);
-      border: 1px solid rgba(0, 229, 153, 0.42);
-      border-top-color: rgba(255, 255, 255, 0.42);
+      background: linear-gradient(180deg, rgba(0, 229, 153, 0.24) 0%, rgba(0, 229, 153, 0.08) 100%);
+      border: 1px solid rgba(0, 229, 153, 0.45);
+      border-top-color: rgba(255, 255, 255, 0.45);
       color: var(--emerald);
       padding: 9px 18px;
       border-radius: 13px;
       font-size: 13px;
       font-weight: 800;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(0, 229, 153, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 14px rgba(0, 229, 153, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-small:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(0, 229, 153, 0.24), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 229, 153, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.5);
     }
 
     body.light-theme .btn-small {
@@ -309,18 +406,46 @@
     .read-reviews-btn {
       display: inline-flex;
       align-items: center;
+      gap: 4px;
       font-size: 12px;
       color: var(--cyan);
       font-weight: 700;
-      padding: 8px 14px;
+      padding: 8px 13px;
       border-radius: 12px;
       background: rgba(0, 180, 216, 0.12);
       border: 1px solid rgba(0, 180, 216, 0.28);
     }
 
     .read-reviews-btn:hover {
-      background: rgba(0, 180, 216, 0.2);
+      background: rgba(0, 180, 216, 0.22);
       transform: translateY(-1px);
+    }
+
+    /* Кнопка быстрого апвоута на карточке */
+    .upvote-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-sub);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      padding: 7px 12px;
+      border-radius: 12px;
+    }
+
+    .upvote-btn:hover {
+      color: var(--emerald);
+      border-color: rgba(0, 229, 153, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .upvote-btn.liked {
+      color: var(--emerald);
+      background: rgba(0, 229, 153, 0.14);
+      border-color: rgba(0, 229, 153, 0.45);
+      box-shadow: 0 0 14px rgba(0, 229, 153, 0.18);
     }
 
     .btn-action {
@@ -331,16 +456,32 @@
       color: #ffffff;
       font-size: 15px;
       font-weight: 800;
-      border: 1px solid rgba(255, 255, 255, 0.32);
-      border-top-color: rgba(255, 255, 255, 0.65);
-      box-shadow: 0 10px 26px rgba(0, 229, 153, 0.24), inset 0 1px 1px rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-top-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 10px 26px rgba(0, 229, 153, 0.25), inset 0 1.5px 1px rgba(255, 255, 255, 0.6);
       position: relative;
       overflow: hidden;
     }
 
+    .btn-action::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: skewX(-22deg);
+      transition: left 0.6s ease;
+    }
+
+    .btn-action:hover::after {
+      left: 155%;
+    }
+
     .btn-action:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 30px rgba(0, 229, 153, 0.34), inset 0 1px 1px rgba(255, 255, 255, 0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(0, 229, 153, 0.36), inset 0 1.5px 1px rgba(255, 255, 255, 0.75);
     }
 
     body:not(.light-theme) .btn-action {
@@ -366,20 +507,89 @@
 
     .tab-view.active {
       display: block;
-      animation: liquidIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      animation: tabSpringIn 0.38s var(--smooth-ease);
     }
 
-    @keyframes liquidIn {
-      0% { opacity: 0; transform: translateY(8px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes tabSpringIn {
+      0% { opacity: 0; transform: translateY(12px) scale(0.992); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ПАНЕЛЬ ФИЛЬТРОВ И ПОИСКА В ЛЕНТЕ (КАК В ЖИВОМ ПРИЛОЖЕНИИ) */
+    .feed-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .filter-chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      background: var(--glass-bg);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      color: var(--text-sub);
+      padding: 8px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .filter-chip:hover {
+      color: var(--text-main);
+      border-color: var(--glass-border-top);
+    }
+
+    .filter-chip.active {
+      color: var(--emerald);
+      background: rgba(0, 229, 153, 0.14);
+      border-color: rgba(0, 229, 153, 0.42);
+      box-shadow: 0 4px 14px rgba(0, 229, 153, 0.14);
+    }
+
+    .feed-search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 210px;
+      max-width: 300px;
+    }
+
+    .feed-search-wrap input {
+      padding-left: 36px;
+      height: 38px;
+      border-radius: 14px;
+      font-size: 13px;
+    }
+
+    .feed-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      opacity: 0.6;
+      pointer-events: none;
     }
 
     .page-header {
-      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
     h1 {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 800;
       letter-spacing: -0.6px;
       color: var(--text-main);
@@ -387,17 +597,17 @@
 
     @media (min-width: 768px) {
       h1 {
-        font-size: 34px;
+        font-size: 32px;
       }
     }
 
     p.subtitle {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--text-sub);
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
-    /* АДАПТИВНАЯ СЕТКА ЛЕНТЫ НА ВЕБ-САЙТЕ */
+    /* АДАПТИВНАЯ СЕТКА ЛЕНТЫ */
     .feed-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -411,7 +621,6 @@
       }
     }
 
-    /* СЕТКА ЭКРАНА ОЦЕНКИ НА ДЕСКТОПЕ */
     .scoring-layout {
       display: grid;
       grid-template-columns: 1fr;
@@ -426,7 +635,6 @@
       }
     }
 
-    /* СЕТКА ПРОФИЛЯ И ПОДАЧИ ИДЕИ НА ДЕСКТОПЕ */
     .profile-layout {
       display: grid;
       grid-template-columns: 1fr;
@@ -441,8 +649,10 @@
       }
     }
 
-    /* КАРТОЧКИ LIQUID GLASS */
+    /* КАРТОЧКИ LIQUID GLASS С ДИНАМИЧЕСКИМ БЛИКОМ КУРСОРА И КАСКАДНОЙ АНИМАЦИЕЙ */
     .card {
+      --mouse-x: 50%;
+      --mouse-y: 50%;
       background: var(--glass-bg);
       backdrop-filter: blur(26px) saturate(180%);
       -webkit-backdrop-filter: blur(26px) saturate(180%);
@@ -456,11 +666,64 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.22s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.28s var(--spring-ease), border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    /* Интерактивный световой блик при движении курсора по карточке */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(360px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.light-theme .card::before {
+      background: radial-gradient(360px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.55), transparent 65%);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .feed-grid .card {
       margin-bottom: 0;
+      opacity: 0;
+      animation: cardCascadeIn 0.45s var(--smooth-ease) forwards;
+    }
+
+    .feed-grid .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 229, 153, 0.35);
+      box-shadow: 0 18px 38px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
+    }
+
+    @keyframes cardCascadeIn {
+      0% { opacity: 0; transform: translateY(18px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Skeleton Shimmer при загрузке */
+    .skeleton-line {
+      height: 14px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.11) 50%, rgba(255,255,255,0.04) 75%);
+      background-size: 200% 100%;
+      animation: shimmerLoad 1.5s infinite linear;
+      margin-bottom: 10px;
+    }
+
+    @keyframes shimmerLoad {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     .card.tier-none { border-color: var(--glass-border); }
@@ -531,6 +794,11 @@
       height: 210px;
       object-fit: cover;
       display: block;
+      transition: transform 0.45s var(--smooth-ease);
+    }
+
+    .carousel-slide:hover img {
+      transform: scale(1.04);
     }
 
     .slide-counter-badge {
@@ -557,6 +825,13 @@
       padding: 4px 9px;
       border-radius: 8px;
       backdrop-filter: blur(8px);
+      opacity: 0.85;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-slide:hover .screenshot-zoom-hint {
+      opacity: 1;
+      transform: scale(1.05);
     }
 
     .upload-zone {
@@ -574,6 +849,11 @@
       gap: 5px;
     }
 
+    .upload-zone:hover {
+      border-color: var(--emerald);
+      background: rgba(0, 229, 153, 0.05);
+    }
+
     .upload-gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -588,6 +868,7 @@
       overflow: hidden;
       border: 1px solid var(--emerald);
       background: rgba(0, 0, 0, 0.3);
+      animation: tabSpringIn 0.3s var(--spring-ease);
     }
 
     .upload-thumb-item img {
@@ -618,8 +899,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       margin-top: auto;
+    }
+
+    .card-actions-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .project-tags {
@@ -650,6 +937,12 @@
       border-radius: 20px;
       cursor: pointer;
       margin-bottom: 10px;
+      transition: transform 0.2s var(--spring-ease), border-color 0.2s ease;
+    }
+
+    .author-badge:hover {
+      transform: translateX(2px);
+      border-color: rgba(0, 229, 153, 0.4);
     }
 
     .author-avatar-bubble {
@@ -705,17 +998,22 @@
       justify-content: space-between;
       margin-bottom: 16px;
       box-shadow: 0 10px 28px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s var(--spring-ease);
     }
 
     .big-num {
-      font-size: 42px;
+      font-size: 44px;
       font-weight: 900;
       letter-spacing: -1px;
       background: var(--grad-main);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
+      transition: transform 0.2s var(--spring-ease);
+    }
+
+    .big-num.bump {
+      transform: scale(1.12);
     }
 
     .crit-header {
@@ -740,6 +1038,7 @@
       border-radius: 10px;
       min-width: 42px;
       text-align: center;
+      transition: transform 0.18s var(--spring-ease), color 0.2s ease;
     }
 
     .crit-desc {
@@ -767,6 +1066,11 @@
       cursor: pointer;
       border: 2.5px solid #fff;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.38);
+      transition: transform 0.18s var(--spring-ease);
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
     }
 
     input[type=text], textarea {
@@ -803,13 +1107,20 @@
       padding: 16px 20px;
       margin-bottom: 12px;
       box-shadow: 0 6px 20px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
+      opacity: 0;
+      animation: cardCascadeIn 0.4s var(--smooth-ease) forwards;
+    }
+
+    .rank-item:hover {
+      transform: translateX(4px);
+      border-color: rgba(0, 229, 153, 0.35);
     }
 
     .rank-num {
       font-size: 16px;
       font-weight: 800;
       color: var(--text-sub);
-      width: 32px;
+      width: 36px;
     }
 
     .rank-info {
@@ -932,6 +1243,11 @@
       }
       .app-modal-sheet {
         border-radius: 24px !important;
+        transform: scale(0.95);
+        transition: transform 0.3s var(--spring-ease);
+      }
+      .app-modal-overlay.open .app-modal-sheet {
+        transform: scale(1);
       }
     }
 
@@ -994,6 +1310,7 @@
 
     .lightbox-overlay.open {
       display: flex;
+      animation: tabSpringIn 0.25s ease;
     }
 
     .lightbox-overlay img {
@@ -1011,7 +1328,7 @@
       border-radius: 22px;
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 250px);
+      height: calc(100vh - 245px);
       min-height: 380px;
       overflow: hidden;
       box-shadow: 0 12px 32px var(--shadow-color), inset 0 1px 1px var(--glass-highlight);
@@ -1033,6 +1350,7 @@
       font-size: 14px;
       line-height: 1.45;
       word-break: break-word;
+      animation: tabSpringIn 0.28s var(--spring-ease);
     }
 
     .agent-msg-bot {
@@ -1047,6 +1365,29 @@
       background: var(--grad-main);
       color: #ffffff;
       font-weight: 600;
+    }
+
+    /* Анимированные точки печати Chief AI */
+    .typing-dots {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px 2px;
+    }
+
+    .typing-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+      animation: bounceDot 1.2s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(2) { animation-delay: 0.16s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.32s; }
+
+    @keyframes bounceDot {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-5px); opacity: 1; }
     }
 
     .agent-input-row {
@@ -1112,7 +1453,7 @@
     .reaction-heart {
       position: absolute;
       pointer-events: none;
-      font-size: 44px;
+      font-size: 40px;
       color: var(--emerald);
       text-shadow: 0 4px 20px rgba(0, 229, 153, 0.6);
       transform: translate(-50%, -50%) scale(0);
@@ -1129,6 +1470,7 @@
 </head>
 <body>
 <div class="fixed-app-background"></div>
+<div id="cursorAura" class="cursor-aura"></div>
 <div id="app-toast" class="app-toast"><span>✨</span><span id="toast-text">Notification</span></div>
 <div class="bg-blob blob-1"></div>
 <div class="bg-blob blob-2 bg-blob"></div>
@@ -1141,17 +1483,21 @@
 
 <div class="container">
   <header class="top-bar">
-    <button type="button" class="brand-link" onclick="switchTab('feed')">
-      <span class="brand-dot"></span>
-      <span>Open Hall</span>
-    </button>
+    <div class="brand-group">
+      <button type="button" class="brand-link" onclick="switchTab('feed')">
+        <span class="brand-dot"></span>
+        <span>Open Hall</span>
+      </button>
+      <span class="live-pill" id="liveCountPill">Live Showcase</span>
+    </div>
 
-    <nav class="desktop-nav" aria-label="Primary Navigation">
-      <button type="button" class="desktop-nav-btn active" onclick="switchTab('feed')">Feed</button>
-      <button type="button" class="desktop-nav-btn" onclick="switchTab('scoring')">Rate</button>
-      <button type="button" class="desktop-nav-btn" onclick="switchTab('top')">Leaderboard</button>
-      <button type="button" class="desktop-nav-btn" onclick="switchTab('agent')">Chief AI</button>
-      <button type="button" class="desktop-nav-btn" onclick="switchTab('profile')">Submit & Profile</button>
+    <nav class="desktop-nav" id="desktopNav" aria-label="Primary Navigation">
+      <div class="desktop-nav-pill" id="desktopNavPill"></div>
+      <button type="button" class="desktop-nav-btn active" data-tab="feed" onclick="switchTab('feed')">Feed</button>
+      <button type="button" class="desktop-nav-btn" data-tab="scoring" onclick="switchTab('scoring')">Rate</button>
+      <button type="button" class="desktop-nav-btn" data-tab="top" onclick="switchTab('top')">Leaderboard</button>
+      <button type="button" class="desktop-nav-btn" data-tab="agent" onclick="switchTab('agent')">Chief AI</button>
+      <button type="button" class="desktop-nav-btn" data-tab="profile" onclick="switchTab('profile')">Submit & Profile</button>
     </nav>
 
     <button type="button" class="theme-toggle-btn ios-btn-tap" id="themeToggleBtn" onclick="toggleAppTheme()" title="Toggle Theme">☀️</button>
@@ -1160,17 +1506,39 @@
   <!-- TAB 1: FEED -->
   <section id="tab-feed" class="tab-view active">
     <div class="page-header">
-      <h1>Discover & Rate</h1>
-      <p class="subtitle">Real people rating bold ideas, apps, and creative projects from 1 to 10</p>
+      <div>
+        <h1>Discover & Rate</h1>
+        <p class="subtitle">Real people rating bold ideas, apps, and creative projects from 1 to 10</p>
+      </div>
+      <button type="button" class="btn-small ios-btn-tap" onclick="switchTab('profile')">+ Drop Idea</button>
     </div>
-    <div id="feed-list" class="feed-grid"><div class="card"><p>Loading community feed...</p></div></div>
+
+    <!-- Живая панель фильтров и поиска -->
+    <div class="feed-toolbar">
+      <div class="filter-chips">
+        <button type="button" class="filter-chip active" onclick="setFeedFilter('all', this)">🔥 All Ideas</button>
+        <button type="button" class="filter-chip" onclick="setFeedFilter('media', this)">🖼️ With Screenshots</button>
+        <button type="button" class="filter-chip" onclick="setFeedFilter('liked', this)">💚 My Upvotes</button>
+      </div>
+      <div class="feed-search-wrap">
+        <span class="feed-search-icon">🔍</span>
+        <input type="text" id="feedSearchInput" placeholder="Search ideas or creators..." oninput="renderFeedList()">
+      </div>
+    </div>
+
+    <div id="feed-list" class="feed-grid">
+      <div class="card"><div class="skeleton-line" style="width:45%"></div><div class="skeleton-line" style="width:85%"></div><div class="skeleton-line" style="width:65%"></div></div>
+      <div class="card"><div class="skeleton-line" style="width:40%"></div><div class="skeleton-line" style="width:90%"></div><div class="skeleton-line" style="width:60%"></div></div>
+    </div>
   </section>
 
   <!-- TAB 2: RATE -->
   <section id="tab-scoring" class="tab-view">
     <div class="page-header">
-      <h1 id="t_score_title">Rate Project</h1>
-      <p class="subtitle">Score across 4 simple criteria from 1 to 10</p>
+      <div>
+        <h1 id="t_score_title">Rate Project</h1>
+        <p class="subtitle">Score across 4 simple criteria from 1 to 10</p>
+      </div>
     </div>
 
     <div class="scoring-layout">
@@ -1236,8 +1604,10 @@
   <!-- TAB 3: TOP -->
   <section id="tab-top" class="tab-view">
     <div class="page-header">
-      <h1>Leaderboard</h1>
-      <p class="subtitle">Highest-rated projects voted by the community</p>
+      <div>
+        <h1>Leaderboard</h1>
+        <p class="subtitle">Highest-rated projects voted by the community</p>
+      </div>
     </div>
     <div id="leaderboard-list"><div class="card"><p>Loading leaderboard...</p></div></div>
   </section>
@@ -1245,8 +1615,10 @@
   <!-- TAB 4: CHIEF AI -->
   <section id="tab-agent" class="tab-view">
     <div class="page-header">
-      <h1>Chief 🦝</h1>
-      <p class="subtitle">Your AI guide for pitching ideas and getting honest feedback</p>
+      <div>
+        <h1>Chief 🦝</h1>
+        <p class="subtitle">Your AI guide for pitching ideas and getting honest feedback</p>
+      </div>
     </div>
 
     <div class="agent-chat-card">
@@ -1263,8 +1635,10 @@
   <!-- TAB 5: PROFILE & SUBMIT -->
   <section id="tab-profile" class="tab-view">
     <div class="page-header">
-      <h1>Your Profile & Submission</h1>
-      <p class="subtitle">Manage your display name, check your rank, and drop a new idea</p>
+      <div>
+        <h1>Your Profile & Submission</h1>
+        <p class="subtitle">Manage your display name, check your rank, and drop a new idea</p>
+      </div>
     </div>
 
     <div class="profile-layout">
@@ -1401,10 +1775,27 @@
   const guestUser = getOrCreateGuestIdentity();
 
   let allProjectsData = [];
+  let currentFeedFilter = 'all';
+  let likedProjects = JSON.parse(localStorage.getItem('openhall_liked_projects') || '[]');
   let currentTheme = localStorage.getItem('openhall_theme') || 'dark';
   let currentTab = 'feed';
   let activeProject = 'Open Hall';
   let uploadedScreenshots = [];
+
+  // Живое световое пятно за курсором и блик внутри карточек
+  const cursorAura = document.getElementById('cursorAura');
+  document.addEventListener('mousemove', (e) => {
+    if (cursorAura) {
+      cursorAura.style.left = e.clientX + 'px';
+      cursorAura.style.top = e.clientY + 'px';
+    }
+    const hoveredCard = e.target.closest('.card');
+    if (hoveredCard) {
+      const rect = hoveredCard.getBoundingClientRect();
+      hoveredCard.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+      hoveredCard.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+    }
+  });
 
   function showToast(text) {
     const toast = document.getElementById('app-toast');
@@ -1430,7 +1821,7 @@
       document.documentElement.classList.remove('light-theme');
       document.body.classList.remove('light-theme');
       if (toggleBtn) toggleBtn.textContent = '☀️';
-      if (metaTheme) metaTheme.setAttribute('content', '#06090e');
+      if (metaTheme) metaTheme.setAttribute('content', '#05080d');
     }
   }
 
@@ -1439,6 +1830,41 @@
   }
 
   applyTheme(currentTheme);
+
+  // Живой апвоут карточки + всплывающее сердечко
+  function toggleUpvote(projectName, btnEl, event) {
+    if (event) event.stopPropagation();
+    const idx = likedProjects.indexOf(projectName);
+    if (idx === -1) {
+      likedProjects.push(projectName);
+      if (btnEl) {
+        btnEl.classList.add('liked');
+        btnEl.innerHTML = '💚 Upvoted';
+      }
+      const card = btnEl ? btnEl.closest('.card') : null;
+      if (card) spawnHeartBurst(card, btnEl);
+    } else {
+      likedProjects.splice(idx, 1);
+      if (btnEl) {
+        btnEl.classList.remove('liked');
+        btnEl.innerHTML = '🤍 Upvote';
+      }
+    }
+    localStorage.setItem('openhall_liked_projects', JSON.stringify(likedProjects));
+    if (currentFeedFilter === 'liked') renderFeedList();
+  }
+
+  function spawnHeartBurst(card, anchorEl) {
+    const cardRect = card.getBoundingClientRect();
+    const btnRect = anchorEl.getBoundingClientRect();
+    const heart = document.createElement('div');
+    heart.className = 'reaction-heart';
+    heart.textContent = '💚';
+    heart.style.left = (btnRect.left - cardRect.left + btnRect.width / 2) + 'px';
+    heart.style.top = (btnRect.top - cardRect.top) + 'px';
+    card.appendChild(heart);
+    setTimeout(() => heart.remove(), 800);
+  }
 
   document.addEventListener('dblclick', (e) => {
     const card = e.target.closest('#feed-list .card');
@@ -1581,6 +2007,145 @@
     return div.innerHTML;
   }
 
+  function setFeedFilter(filter, btnEl) {
+    currentFeedFilter = filter;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+    renderFeedList();
+  }
+
+  function renderFeedList() {
+    const feedContainer = document.getElementById('feed-list');
+    const searchVal = (document.getElementById('feedSearchInput')?.value || '').trim().toLowerCase();
+
+    let projects = [...allProjectsData];
+
+    if (currentFeedFilter === 'media') {
+      projects = projects.filter(p => getProjectScreenshotsList(p).length > 0);
+    } else if (currentFeedFilter === 'liked') {
+      projects = projects.filter(p => likedProjects.includes(p.name));
+    }
+
+    if (searchVal) {
+      projects = projects.filter(p =>
+        (p.name || '').toLowerCase().includes(searchVal) ||
+        (p.description || '').toLowerCase().includes(searchVal) ||
+        (p.author_name || '').toLowerCase().includes(searchVal)
+      );
+    }
+
+    if (!projects || projects.length === 0) {
+      feedContainer.innerHTML = `<div class="card"><p>No matching ideas found. Try another filter or drop your own idea!</p></div>`;
+      return;
+    }
+
+    feedContainer.innerHTML = projects.map((p, index) => {
+      const safeDisplayName = escapeHtml(p.name);
+      const safeOriginalNameJs = escapeHtml(p.name).replace(/'/g, "\\'");
+      const isLiked = likedProjects.includes(p.name);
+      const delay = Math.min(index * 60, 420);
+
+      const authorBadgeHtml = p.submitted_by ? `
+        <div class="author-badge ios-btn-tap" onclick="openUserProfile('${escapeHtml(p.submitted_by)}')">
+          <div class="author-avatar-bubble">👤</div>
+          <span class="author-name-text">${escapeHtml(p.author_name || 'Creator')}</span>
+        </div>
+      ` : '';
+
+      const screens = getProjectScreenshotsList(p);
+      const carouselHtml = buildCarouselHtml(screens, safeDisplayName);
+
+      return `
+        <article class="card" style="animation-delay:${delay}ms">
+          ${authorBadgeHtml}
+          <h3>${safeDisplayName}</h3>
+          <p>${escapeHtml(p.description)}</p>
+          ${carouselHtml}
+          <div class="card-footer">
+            <div class="card-actions-left">
+              <button type="button" class="upvote-btn ${isLiked ? 'liked' : ''}" onclick="toggleUpvote('${safeOriginalNameJs}', this, event)">
+                ${isLiked ? '💚 Upvoted' : '🤍 Upvote'}
+              </button>
+              <span class="read-reviews-btn ios-btn-tap" onclick="openReviews('${safeOriginalNameJs}')">Reviews →</span>
+            </div>
+            <button type="button" class="btn-small ios-btn-tap" onclick="startScoring('${safeOriginalNameJs}')">Rate</button>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const sharedProj = urlParams.get('project');
+    if (sharedProj && !window._sharedHandled) {
+      window._sharedHandled = true;
+      const found = allProjectsData.find(item => item.name.toLowerCase() === sharedProj.toLowerCase());
+      if (found) startScoring(found.name);
+    }
+  }
+
+  async function fetchFeed() {
+    const feedContainer = document.getElementById('feed-list');
+    try {
+      const res = await fetch(`${API_URL}/api/projects`);
+      const projects = await res.json();
+      allProjectsData = projects || [];
+      const livePill = document.getElementById('liveCountPill');
+      if (livePill && allProjectsData.length > 0) {
+        livePill.textContent = `${allProjectsData.length} Ideas Live`;
+      }
+      renderFeedList();
+    } catch (err) {
+      feedContainer.innerHTML = `<div class="card"><p style="color:#ff5c5c;">Waking up server... please refresh in 15 seconds.</p></div>`;
+    }
+  }
+
+  async function fetchLeaderboard() {
+    const listContainer = document.getElementById('leaderboard-list');
+    try {
+      const res = await fetch(`${API_URL}/api/leaderboard`);
+      const items = await res.json();
+
+      if (!items || items.length === 0) {
+        listContainer.innerHTML = `
+          <div class="rank-item">
+            <div class="rank-info">
+              <div class="rank-title">No ratings yet</div>
+              <div class="rank-cat">Be the first to rate a project!</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      listContainer.innerHTML = items.map((item, index) => {
+        const medal = index === 0 ? '🥇' : (index === 1 ? '🥈' : (index === 2 ? '🥉' : String(index + 1).padStart(2, '0')));
+        const safeDisplayName = escapeHtml(item.project_name);
+        const safeOriginalNameJs = escapeHtml(item.project_name).replace(/'/g, "\\'");
+        const delay = Math.min(index * 55, 400);
+        return `
+          <div class="rank-item ios-btn-tap" style="animation-delay:${delay}ms" onclick="openReviews('${safeOriginalNameJs}')">
+            <span class="rank-num">${medal}</span>
+            <div class="rank-info">
+              <div class="rank-title">${safeDisplayName}</div>
+              <div class="rank-cat">Votes: ${item.total_votes}</div>
+            </div>
+            <span class="rank-score">${item.avg_score}</span>
+          </div>
+        `;
+      }).join('');
+    } catch (err) {
+      listContainer.innerHTML = `
+        <div class="rank-item">
+          <div class="rank-info">
+            <div class="rank-title" style="color:#ff5c5c;">Waking up server...</div>
+            <div class="rank-cat">Try again in 15 seconds</div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // Modals
   async function openMyContentModal(type) {
     const modal = document.getElementById('my-content-modal');
     const title = document.getElementById('myContentModalTitle');
@@ -1701,109 +2266,6 @@
 
   function closeUserProfileModal() {
     document.getElementById('user-profile-modal').classList.remove('open');
-  }
-
-  function renderFeedList() {
-    const feedContainer = document.getElementById('feed-list');
-    let projects = allProjectsData;
-
-    if (!projects || projects.length === 0) {
-      feedContainer.innerHTML = `<div class="card"><p>No published projects yet. Be the first to drop an idea!</p></div>`;
-      return;
-    }
-
-    feedContainer.innerHTML = projects.map((p) => {
-      const safeDisplayName = escapeHtml(p.name);
-      const safeOriginalNameJs = escapeHtml(p.name).replace(/'/g, "\\'");
-
-      const authorBadgeHtml = p.submitted_by ? `
-        <div class="author-badge ios-btn-tap" onclick="openUserProfile('${escapeHtml(p.submitted_by)}')">
-          <div class="author-avatar-bubble">👤</div>
-          <span class="author-name-text">${escapeHtml(p.author_name || 'Creator')}</span>
-        </div>
-      ` : '';
-
-      const screens = getProjectScreenshotsList(p);
-      const carouselHtml = buildCarouselHtml(screens, safeDisplayName);
-
-      return `
-        <article class="card">
-          ${authorBadgeHtml}
-          <h3>${safeDisplayName}</h3>
-          <p>${escapeHtml(p.description)}</p>
-          ${carouselHtml}
-          <div class="card-footer">
-            <span class="read-reviews-btn ios-btn-tap" onclick="openReviews('${safeOriginalNameJs}')">Read reviews →</span>
-            <button type="button" class="btn-small ios-btn-tap" onclick="startScoring('${safeOriginalNameJs}')">Rate</button>
-          </div>
-        </article>
-      `;
-    }).join('');
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const sharedProj = urlParams.get('project');
-    if (sharedProj && !window._sharedHandled) {
-      window._sharedHandled = true;
-      const found = projects.find(item => item.name.toLowerCase() === sharedProj.toLowerCase());
-      if (found) startScoring(found.name);
-    }
-  }
-
-  async function fetchFeed() {
-    const feedContainer = document.getElementById('feed-list');
-    try {
-      const res = await fetch(`${API_URL}/api/projects`);
-      const projects = await res.json();
-      allProjectsData = projects || [];
-      renderFeedList();
-    } catch (err) {
-      feedContainer.innerHTML = `<div class="card"><p style="color:#ff5c5c;">Waking up server... please refresh in 15 seconds.</p></div>`;
-    }
-  }
-
-  async function fetchLeaderboard() {
-    const listContainer = document.getElementById('leaderboard-list');
-    try {
-      const res = await fetch(`${API_URL}/api/leaderboard`);
-      const items = await res.json();
-
-      if (!items || items.length === 0) {
-        listContainer.innerHTML = `
-          <div class="rank-item">
-            <div class="rank-info">
-              <div class="rank-title">No ratings yet</div>
-              <div class="rank-cat">Be the first to rate a project!</div>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      listContainer.innerHTML = items.map((item, index) => {
-        const rankNum = String(index + 1).padStart(2, '0');
-        const safeDisplayName = escapeHtml(item.project_name);
-        const safeOriginalNameJs = escapeHtml(item.project_name).replace(/'/g, "\\'");
-        return `
-          <div class="rank-item ios-btn-tap" onclick="openReviews('${safeOriginalNameJs}')">
-            <span class="rank-num">${rankNum}</span>
-            <div class="rank-info">
-              <div class="rank-title">${safeDisplayName}</div>
-              <div class="rank-cat">Votes: ${item.total_votes}</div>
-            </div>
-            <span class="rank-score">${item.avg_score}</span>
-          </div>
-        `;
-      }).join('');
-    } catch (err) {
-      listContainer.innerHTML = `
-        <div class="rank-item">
-          <div class="rank-info">
-            <div class="rank-title" style="color:#ff5c5c;">Waking up server...</div>
-            <div class="rank-cat">Try again in 15 seconds</div>
-          </div>
-        </div>
-      `;
-    }
   }
 
   const reviewsModal = document.getElementById('reviews-modal');
@@ -1975,6 +2437,17 @@
     }
   }
 
+  // Плавное скольжение капсулы в десктопной шапке
+  function updateDesktopNavPill() {
+    const pill = document.getElementById('desktopNavPill');
+    const activeBtn = document.querySelector('.desktop-nav-btn.active');
+    if (!pill || !activeBtn) return;
+    pill.style.width = activeBtn.offsetWidth + 'px';
+    pill.style.transform = `translateX(${activeBtn.offsetLeft - 3}px)`;
+  }
+
+  window.addEventListener('resize', updateDesktopNavPill);
+
   function moveNavIndicator(tabId) {
     const indicator = document.getElementById('nav-indicator');
     if (!indicator) return;
@@ -1994,6 +2467,7 @@
       document.querySelectorAll('.nav-btn')[idx]?.classList.add('active');
       document.querySelectorAll('.desktop-nav-btn')[idx]?.classList.add('active');
       moveNavIndicator(tabId);
+      updateDesktopNavPill();
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2033,6 +2507,10 @@
     const avgNum = sum / sliders.length;
     const avg = avgNum.toFixed(1);
     totalEl.textContent = avg;
+
+    totalEl.classList.remove('bump');
+    void totalEl.offsetWidth;
+    totalEl.classList.add('bump');
 
     let dynamicAccentColor = null;
 
@@ -2228,16 +2706,18 @@
     switchTab('scoring');
   }
 
+  // Chief AI Chat с индикатором печати
   const agentMessagesEl = document.getElementById('agent-messages');
   const agentInputEl = document.getElementById('agentInput');
   const agentSendBtn = document.getElementById('agentSendBtn');
   let agentHistory = [];
   let isAgentSending = false;
 
-  function appendAgentMessage(role, text) {
+  function appendAgentMessage(role, text, isHtml = false) {
     const bubble = document.createElement('div');
     bubble.className = role === 'user' ? 'agent-msg agent-msg-user' : 'agent-msg agent-msg-bot';
-    bubble.textContent = text;
+    if (isHtml) bubble.innerHTML = text;
+    else bubble.textContent = text;
     agentMessagesEl.appendChild(bubble);
     agentMessagesEl.scrollTop = agentMessagesEl.scrollHeight;
     return bubble;
@@ -2255,6 +2735,8 @@
     agentInputEl.style.height = 'auto';
     agentSendBtn.disabled = true;
 
+    const typingBubble = appendAgentMessage('bot', '<div class="typing-dots"><span></span><span></span><span></span></div>', true);
+
     try {
       const res = await fetch(`${API_URL}/api/agent/chat`, {
         method: 'POST',
@@ -2265,6 +2747,7 @@
         })
       });
       const data = await res.json();
+      typingBubble.remove();
 
       if (data.available && data.reply) {
         appendAgentMessage('bot', data.reply);
@@ -2273,6 +2756,7 @@
         appendAgentMessage('bot', 'Could not get a response. Please try again.');
       }
     } catch (err) {
+      typingBubble.remove();
       appendAgentMessage('bot', 'Connection issue. Please try again.');
     } finally {
       agentSendBtn.disabled = false;
@@ -2290,6 +2774,7 @@
 
   calculate();
   renderProfileStats();
+  setTimeout(updateDesktopNavPill, 50);
   fetchFeed();
   fetchProfile();
 </script>
